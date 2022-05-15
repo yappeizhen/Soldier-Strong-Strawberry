@@ -7,8 +7,8 @@ Template to quickly get started on new React Native Expo projects.
 - [x] Shifting bottom tab navigation
 - [x] Stack navigation and modal
 - [x] Drawer navigation
-- [ ] Firebase backend
-- [ ] Sign up page
+- [x] Sign up page
+- [ ] Firebase auth
 - [ ] Log in and log out
 - [ ] Profile page
 
