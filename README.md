@@ -6,8 +6,8 @@
 - [x] Shifting bottom tab navigation
 - [x] Stack navigation and modal
 - [x] Drawer navigation
-- [x] Firebase backend
-- [x] Sign up page
+- [x] Linked to Firebase
+- [x] Sign up
 - [x] Basic log in and log out
 - [ ] Input validation
 - [ ] Success and error messages
