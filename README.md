@@ -51,10 +51,10 @@ Use `toggles.ts` in the src folder to configure customisations such as enabling 
 
 ## Hooks
 
-#### `useAuthState`
+### `useAuthState`
 
 Checks if the user is logged in, and if so, returns the corresponding user information
 
-#### `useColorScheme`
+### `useColorScheme`
 
 Checks the color scheme (dark or light) of the user's device
