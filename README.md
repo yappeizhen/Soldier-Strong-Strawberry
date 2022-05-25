@@ -1,5 +1,4 @@
-# React Native Expo Boilerplate
-Template to quickly get started on new React Native Expo projects. 
+# Strawberry-Brainhack2022
 
 ## Features
 - [x] Light and dark themes that match native system display
