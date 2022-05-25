@@ -46,7 +46,15 @@ Like `npm start`, but also attempts to open your app in the iOS Simulator if you
 Like `npm start`, but also attempts to open your app on a connected Android device or emulator. Requires an installation of Android build tools (see [React Native docs](https://facebook.github.io/react-native/docs/getting-started.html) for detailed setup). We also recommend installing Genymotion as your Android emulator. Once you've finished setting up the native build environment, there are two options for making the right copy of `adb` available to Create React Native App:
 
 ## Personalisation
+
 Use `toggles.ts` in the src folder to configure customisations such as enabling authentication, and switching between bottom tab configurations.
+
+### Authentication and Firebase
+
+Create a [new firebase webapp](console.firebase.google.com) and add the firebaseConfig details to the file firebase.js
+
+<img width="517" alt="image" src="https://user-images.githubusercontent.com/66234273/170323452-8b7be8ad-849f-4482-a832-37806845ed7c.png">
+<img width="346" alt="image" src="https://user-images.githubusercontent.com/66234273/170323809-f8b5a6ca-9ef1-491d-a483-b11d66bef7ef.png">
 
 ## Hooks
 
