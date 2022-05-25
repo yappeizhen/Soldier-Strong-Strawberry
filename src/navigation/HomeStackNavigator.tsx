@@ -1,25 +1,34 @@
 import * as React from "react";
+import { ComponentType } from "react";
 
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
-import LoginScreen from "../screens/LoginScreen";
+import { HomeStackParamList } from "../../types";
 import ModalScreen from "../screens/ModalScreen";
 import NotFoundScreen from "../screens/NotFoundScreen";
-import { HomeStackParamList } from "../types";
-import BottomTabNavigator from "./BottomTabShifting";
+import { toggles } from "../toggles";
+import BottomTabShifting from "./BottomTabShifting";
+import BottomTabSwipeable from "./BottomTabSwipeable";
 
 /**
  * A root stack navigator is often used for displaying modals on top of all other content.
  * https://reactnavigation.org/docs/modal
  */
 const Stack = createNativeStackNavigator<HomeStackParamList>();
+const renderTabNavigatorType = () => {
+  if (toggles.homeTabLayout === "shifting") {
+    return BottomTabShifting;
+  } else {
+    return BottomTabSwipeable;
+  }
+};
 
 export default function HomeStackNavigator() {
   return (
     <Stack.Navigator>
       <Stack.Screen
         name="Home"
-        component={BottomTabNavigator}
+        component={renderTabNavigatorType()}
         options={{ headerShown: false }}
       />
       <Stack.Screen

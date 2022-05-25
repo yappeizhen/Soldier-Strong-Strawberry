@@ -1,4 +1,6 @@
 import * as React from "react";
+import { SetStateAction } from "react";
+import { Dispatch } from "react";
 import { StyleSheet } from "react-native";
 import { TextInput } from "react-native-paper";
 import { TextInputLabelProp } from "react-native-paper/lib/typescript/components/TextInput/types";
@@ -16,7 +18,7 @@ export type Props = {
   inactiveColor?: string | undefined;
   style?: any;
   value?: string | undefined;
-  onChangeText: () => void;
+  onChangeText: Dispatch<SetStateAction<string>>;
 };
 
 export default function CustomTextInput({
@@ -39,7 +41,7 @@ export default function CustomTextInput({
 
   const styles = StyleSheet.create({
     customInputText: {
-      width: 200,
+      width: 260,
       backgroundColor: "transparent",
     },
   });

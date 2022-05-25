@@ -3,10 +3,10 @@ import * as React from "react";
 import { FontAwesome } from "@expo/vector-icons";
 import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
 
+import { RootTabParamList } from "../../types";
 import TabOneScreen from "../screens/TabOneScreen";
 import TabThreeScreen from "../screens/TabThreeScreen";
 import TabTwoScreen from "../screens/TabTwoScreen";
-import { RootTabParamList } from "../types";
 
 /**
  * A bottom tab navigator displays tab buttons on the bottom of the display to switch screens.
@@ -14,7 +14,7 @@ import { RootTabParamList } from "../types";
  */
 const BottomTab = createMaterialBottomTabNavigator<RootTabParamList>();
 
-export default function BottomTabV1() {
+export default function BottomTabShifting() {
   return (
     <BottomTab.Navigator initialRouteName="TabOne" shifting={true}>
       <BottomTab.Screen

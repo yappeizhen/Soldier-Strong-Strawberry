@@ -2,9 +2,9 @@ import * as React from "react";
 
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
+import { AuthStackParamList } from "../../types";
 import LoginScreen from "../screens/LoginScreen";
 import RegisterScreen from "../screens/RegisterScreen";
-import { AuthStackParamList } from "../types";
 
 /**
  * A root stack navigator is often used for displaying modals on top of all other content.
