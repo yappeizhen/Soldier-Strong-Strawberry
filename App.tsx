@@ -7,10 +7,10 @@ import {
   NavigationContainer,
 } from "@react-navigation/native";
 
-import useCachedResources from "./hooks/useCachedResources";
-import useColorScheme from "./hooks/useColorScheme";
-import LinkingConfiguration from "./navigation/LinkingConfiguration";
-import RootDrawerNavigator from "./navigation/RootDrawerNavigator";
+import useCachedResources from "./src/hooks/useCachedResources";
+import useColorScheme from "./src/hooks/useColorScheme";
+import LinkingConfiguration from "./src/navigation/LinkingConfiguration";
+import RootDrawerNavigator from "./src/navigation/RootDrawerNavigator";
 
 export default function App() {
   const isLoadingComplete = useCachedResources();

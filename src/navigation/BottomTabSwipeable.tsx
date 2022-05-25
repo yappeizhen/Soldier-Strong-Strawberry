@@ -3,17 +3,17 @@ import * as React from "react";
 import { FontAwesome } from "@expo/vector-icons";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 
+import { RootTabParamList } from "../../types";
 import TabOneScreen from "../screens/TabOneScreen";
 import TabThreeScreen from "../screens/TabThreeScreen";
 import TabTwoScreen from "../screens/TabTwoScreen";
-import { RootTabParamList } from "../types";
 
 /**
  * This navigator is horizontally swipeable and can be placed at the top or bottom of the screen
  */
 const BottomTab = createMaterialTopTabNavigator<RootTabParamList>();
 
-export default function BottomTabNavigator() {
+export default function BottomTabSwipeable() {
   return (
     <BottomTab.Navigator
       initialRouteName="TabOne"
