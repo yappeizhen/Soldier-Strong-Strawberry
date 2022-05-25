@@ -16,13 +16,13 @@ import { getAuth } from 'firebase/auth'
 
 
 const firebaseConfig = {
-  apiKey: "AIzaSyAj-BgoRMB5unYIF3TAaHXlVQ539moXzhI",
-  authDomain: "react-native-expo-template.firebaseapp.com",
-  projectId: "react-native-expo-template",
-  storageBucket: "react-native-expo-template.appspot.com",
-  messagingSenderId: "353708685817",
-  appId: "1:353708685817:web:920313181f14b9d3d0e528",
-  measurementId: "G-PG2RWVJ2VN"
+  apiKey: "AIzaSyD9jC7AJtNdSXPGLrlhGr-xVdDb1Q8NRCM",
+  authDomain: "brainhack2022-33670.firebaseapp.com",
+  projectId: "brainhack2022-33670",
+  storageBucket: "brainhack2022-33670.appspot.com",
+  messagingSenderId: "76484965569",
+  appId: "1:76484965569:web:f090cd7eb868b9225c1040",
+  measurementId: "G-S6NMX64HVX"
 };
 
 export const firebaseApp = initializeApp(firebaseConfig);
