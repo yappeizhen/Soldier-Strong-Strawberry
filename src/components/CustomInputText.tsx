@@ -16,6 +16,7 @@ export type Props = {
   textColor?: string | undefined;
   activeColor?: string | undefined;
   inactiveColor?: string | undefined;
+  secureTextEntry?: boolean;
   style?: any;
   value?: string | undefined;
   onChangeText: Dispatch<SetStateAction<string>>;
@@ -29,6 +30,7 @@ export default function CustomTextInput({
   onChangeText,
   placeholder,
   placeholderTextColor,
+  secureTextEntry = true,
   style,
   textColor,
   value,
@@ -54,6 +56,7 @@ export default function CustomTextInput({
       onChangeText={onChangeText}
       placeholder={placeholder}
       placeholderTextColor={placeholder}
+      secureTextEntry={secureTextEntry}
       style={[styles.customInputText, style]}
       theme={{
         colors: {

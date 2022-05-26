@@ -44,6 +44,7 @@ export default function LoginScreen() {
         <CustomTextInput
           label="Password"
           onChangeText={setPassword}
+          secureTextEntry={true}
           value={password}
         />
       </View>

@@ -15,8 +15,6 @@ import { AsyncStorage } from '@react-native-async-storage/async-storage';
 // import 'firebase/compat/remote-config';
 // import 'firebase/compat/storage';
 
-
-
 const firebaseConfig = {
   apiKey: "AIzaSyD9jC7AJtNdSXPGLrlhGr-xVdDb1Q8NRCM",
   authDomain: "brainhack2022-33670.firebaseapp.com",
