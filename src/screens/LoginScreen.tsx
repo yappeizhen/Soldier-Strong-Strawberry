@@ -17,9 +17,6 @@ export default function LoginScreen({ navigation }: any) {
 
   const [snackIsVisible, setSnackIsVisible] = useState<boolean>(false);
   const [snackMessage, setSnackMessage] = useState<string>("");
-  const [snackType, setSnackType] = useState<
-    "error" | "default" | "success" | "warning" | undefined
-  >("error");
 
   const handleLogin = () => {
     signInWithEmailAndPassword(auth, email.trim(), password)
@@ -90,7 +87,7 @@ export default function LoginScreen({ navigation }: any) {
         onDismiss={() => {
           setSnackIsVisible(false);
         }}
-        type={snackType}
+        type="error"
         message={snackMessage}
       ></CustomSnackBar>
     </View>

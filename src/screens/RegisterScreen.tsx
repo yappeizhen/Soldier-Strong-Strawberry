@@ -14,9 +14,6 @@ export default function LoginScreen() {
 
   const [snackIsVisible, setSnackIsVisible] = useState<boolean>(false);
   const [snackMessage, setSnackMessage] = useState<string>("");
-  const [snackType, setSnackType] = useState<
-    "error" | "default" | "success" | "warning" | undefined
-  >("error");
 
   const auth = firebase.auth;
   const handleSignup = () => {
@@ -74,7 +71,7 @@ export default function LoginScreen() {
         onDismiss={() => {
           setSnackIsVisible(false);
         }}
-        type={snackType}
+        type="error"
         message={snackMessage}
       ></CustomSnackBar>
     </View>
