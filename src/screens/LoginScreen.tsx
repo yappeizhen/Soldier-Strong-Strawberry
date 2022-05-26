@@ -2,9 +2,11 @@ import { signInWithEmailAndPassword } from "firebase/auth";
 import React from "react";
 import { useState } from "react";
 import { StyleSheet, View } from "react-native";
+import { Snackbar } from "react-native-paper";
 
 import CustomButton from "../components/CustomButton";
 import CustomTextInput from "../components/CustomInputText";
+import CustomSnackBar from "../components/CustomSnackBar";
 import Colors from "../constants/Colors";
 import { auth } from "../firebase/firebase";
 import useColorScheme from "../hooks/useColorScheme";
@@ -14,6 +16,9 @@ export default function LoginScreen({ navigation }: any) {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
 
+  const [snackIsVisible, setSnackIsVisible] = useState<boolean>(false);
+  const [snackMessage, setSnackMessage] = useState<string>("");
+
   const handleLogin = () => {
     signInWithEmailAndPassword(auth, email.trim(), password)
       .then((userCredential) => {
@@ -21,7 +26,17 @@ export default function LoginScreen({ navigation }: any) {
         console.log(`${user.email} signed in!`);
       })
       .catch((error: any) => {
-        console.error(error.message);
+        if (error.code === "auth/wrong-password") {
+          setSnackMessage("Incorrect password");
+        } else if (error.code === "auth/invalid-email") {
+          setSnackMessage("Invalid email");
+        } else if (error.code === "auth/user-not-found") {
+          setSnackMessage("User email not found");
+        } else {
+          setSnackMessage(error.message);
+        }
+        setSnackIsVisible(true);
+        console.log(error.code);
       });
   };
 
@@ -68,6 +83,14 @@ export default function LoginScreen({ navigation }: any) {
           SIGN UP
         </CustomButton>
       </View>
+      <CustomSnackBar
+        visible={snackIsVisible}
+        onDismiss={() => {
+          setSnackIsVisible(snackIsVisible);
+        }}
+        type="error"
+        message={snackMessage}
+      ></CustomSnackBar>
     </View>
   );
 }

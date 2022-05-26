@@ -2,6 +2,7 @@ import { createUserWithEmailAndPassword } from "firebase/auth";
 import React from "react";
 import { useState } from "react";
 import { StyleSheet, View } from "react-native";
+import { Snackbar } from "react-native-paper";
 
 import CustomButton from "../components/CustomButton";
 import CustomTextInput from "../components/CustomInputText";

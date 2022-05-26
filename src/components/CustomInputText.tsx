@@ -30,7 +30,7 @@ export default function CustomTextInput({
   onChangeText,
   placeholder,
   placeholderTextColor,
-  secureTextEntry = true,
+  secureTextEntry = false,
   style,
   textColor,
   value,
