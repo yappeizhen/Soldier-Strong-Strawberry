@@ -2,7 +2,6 @@ import { signInWithEmailAndPassword } from "firebase/auth";
 import React from "react";
 import { useState } from "react";
 import { StyleSheet, View } from "react-native";
-import { Snackbar } from "react-native-paper";
 
 import CustomButton from "../components/CustomButton";
 import CustomTextInput from "../components/CustomInputText";
@@ -18,12 +17,15 @@ export default function LoginScreen({ navigation }: any) {
 
   const [snackIsVisible, setSnackIsVisible] = useState<boolean>(false);
   const [snackMessage, setSnackMessage] = useState<string>("");
+  const [snackType, setSnackType] = useState<
+    "error" | "default" | "success" | "warning" | undefined
+  >("error");
 
   const handleLogin = () => {
     signInWithEmailAndPassword(auth, email.trim(), password)
       .then((userCredential) => {
         const user = userCredential.user;
-        console.log(`${user.email} signed in!`);
+        console.log(user.email, "successfully signed in!");
       })
       .catch((error: any) => {
         if (error.code === "auth/wrong-password") {
@@ -36,7 +38,7 @@ export default function LoginScreen({ navigation }: any) {
           setSnackMessage(error.message);
         }
         setSnackIsVisible(true);
-        console.log(error.code);
+        // console.log(error.code);
       });
   };
 
@@ -86,9 +88,9 @@ export default function LoginScreen({ navigation }: any) {
       <CustomSnackBar
         visible={snackIsVisible}
         onDismiss={() => {
-          setSnackIsVisible(snackIsVisible);
+          setSnackIsVisible(false);
         }}
-        type="error"
+        type={snackType}
         message={snackMessage}
       ></CustomSnackBar>
     </View>

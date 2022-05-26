@@ -1,12 +1,8 @@
 import * as React from "react";
 import { StyleProp, StyleSheet, View, ViewStyle } from "react-native";
 import { Button, Snackbar, Text } from "react-native-paper";
-import { color } from "react-native-reanimated";
 
-import { AntDesign, Entypo, MaterialIcons } from "@expo/vector-icons";
-
-import Colors from "../constants/Colors";
-import useColorScheme from "../hooks/useColorScheme";
+import { AntDesign, MaterialIcons } from "@expo/vector-icons";
 
 export type Props = {
   visible: boolean;
@@ -26,7 +22,7 @@ export type Props = {
 export default function CustomSnackBar({
   visible,
   action,
-  duration = 7000,
+  duration = 1500,
   onDismiss,
   message,
   wrapperStyle,
@@ -39,16 +35,15 @@ export default function CustomSnackBar({
       return <></>;
     }
     if (type === "error") {
-      return <MaterialIcons name="error-outline" size={20} color="red" />;
+      return <MaterialIcons name="error-outline" size={20} color="#EB212E" />;
     } else if (type === "warning") {
       return <MaterialIcons name="error-outline" size={20} color="yellow" />;
     } else if (type === "success") {
-      return <AntDesign name="checkcircleo" size={20} color="green" />;
+      return <AntDesign name="checkcircleo" size={20} color="#32CD32" />;
     }
     return <></>;
   };
 
-  const colorScheme = useColorScheme();
   const color = "white";
   const styles = StyleSheet.create({
     container: {
@@ -60,7 +55,6 @@ export default function CustomSnackBar({
     snackbar: {
       borderRadius: 8,
       opacity: 0.75,
-      textShadowColor: "red",
       alignContent: "center",
       justifyContent: "space-between",
       flexDirection: "row",
