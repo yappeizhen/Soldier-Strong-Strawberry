@@ -9,8 +9,8 @@
 - [x] Linked to Firebase
 - [x] Sign up
 - [x] Basic log in and log out
-- [ ] Input validation
-- [ ] Success and error messages
+- [x] Input validation
+- [x] Success and error messages
 - [ ] Loading pages
 
 ## Getting Started
