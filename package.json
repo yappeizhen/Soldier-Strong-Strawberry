@@ -19,6 +19,7 @@
     "@firebase/app": "^0.7.24",
     "@firebase/auth": "^0.20.1",
     "@fortawesome/react-native-fontawesome": "^0.2.7",
+    "@react-native-async-storage/async-storage": "^1.17.5",
     "@react-native-community/masked-view": "^0.1.11",
     "@react-native-firebase/app": "^14.9.3",
     "@react-native-firebase/auth": "^14.9.3",

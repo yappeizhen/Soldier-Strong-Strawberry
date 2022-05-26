@@ -3,7 +3,9 @@ import { initializeApp } from 'firebase/app';
 // import { getFirestore } from '@firebase/firestore';
 // import { getFunctions } from '@firebase/functions';
 // import { getStorage } from '@firebase/storage';
-import { getAuth } from 'firebase/auth'
+import { initializeAuth } from 'firebase/auth'
+
+import { AsyncStorage } from '@react-native-async-storage/async-storage';
 
 // Import firebase packages we want
 // import 'firebase/compat/analytics';
@@ -26,7 +28,7 @@ const firebaseConfig = {
 };
 
 export const firebaseApp = initializeApp(firebaseConfig);
-export const auth = getAuth(firebaseApp);
+export const auth = initializeAuth(firebaseApp, { persistence: AsyncStorage });
 // export const firebaseAnalytics = getAnalytics(firebaseApp);
 // export const firebaseDB = getFirestore(firebaseApp);
 // export const firebaseFunctions = getFunctions(firebaseApp);
