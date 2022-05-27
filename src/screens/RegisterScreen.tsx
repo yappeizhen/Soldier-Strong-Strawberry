@@ -8,7 +8,7 @@ import CustomTextInput from "../components/CustomInputText";
 import CustomSnackBar from "../components/CustomSnackBar";
 import * as firebase from "../firebase/firebase";
 
-export default function LoginScreen() {
+export default function RegisterScreen() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
