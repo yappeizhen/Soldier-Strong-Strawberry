@@ -1,19 +1,11 @@
 import { initializeApp } from 'firebase/app';
-// import { getAnalytics } from '@firebase/analytics';
-// import { getFirestore } from '@firebase/firestore';
 // import { getFunctions } from '@firebase/functions';
 // import { getStorage } from '@firebase/storage';
 import { initializeAuth } from 'firebase/auth'
 
+// import { getAnalytics } from '@firebase/analytics';
+import { getFirestore } from '@firebase/firestore';
 import { AsyncStorage } from '@react-native-async-storage/async-storage';
-
-// Import firebase packages we want
-// import 'firebase/compat/analytics';
-
-// import 'firebase/compat/firestore';
-// import 'firebase/compat/functions';
-// import 'firebase/compat/remote-config';
-// import 'firebase/compat/storage';
 
 const firebaseConfig = {
   apiKey: "AIzaSyD9jC7AJtNdSXPGLrlhGr-xVdDb1Q8NRCM",
@@ -26,7 +18,8 @@ const firebaseConfig = {
 };
 
 export const firebaseApp = initializeApp(firebaseConfig);
-export const auth = initializeAuth(firebaseApp, { persistence: AsyncStorage });
+export const firebaseAuth = initializeAuth(firebaseApp, { persistence: AsyncStorage });
+export const firebaseFirestore = getFirestore(firebaseApp);
 // export const firebaseAnalytics = getAnalytics(firebaseApp);
 // export const firebaseDB = getFirestore(firebaseApp);
 // export const firebaseFunctions = getFunctions(firebaseApp);

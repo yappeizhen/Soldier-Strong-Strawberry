@@ -1,4 +1,5 @@
 import { createUserWithEmailAndPassword } from "firebase/auth";
+import { doc, setDoc } from "firebase/firestore";
 import React from "react";
 import { useState } from "react";
 import { StyleSheet, View } from "react-native";
@@ -6,20 +7,36 @@ import { StyleSheet, View } from "react-native";
 import CustomButton from "../components/CustomButton";
 import CustomTextInput from "../components/CustomInputText";
 import CustomSnackBar from "../components/CustomSnackBar";
-import * as firebase from "../firebase/firebase";
+import { firebaseAuth, firebaseFirestore } from "../firebase/firebase";
 
 export default function RegisterScreen() {
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const [snackIsVisible, setSnackIsVisible] = useState<boolean>(false);
   const [snackMessage, setSnackMessage] = useState<string>("");
 
-  const auth = firebase.auth;
   const handleSignup = () => {
-    createUserWithEmailAndPassword(auth, email.trim(), password)
+    if (!name) {
+      setSnackIsVisible(true);
+      setSnackMessage("Please enter your name");
+      return;
+    }
+    createUserWithEmailAndPassword(firebaseAuth, email.trim(), password)
       .then((userCredential) => {
         console.log(userCredential.user.email, "signed in successfully");
+        try {
+          setDoc(
+            doc(firebaseFirestore, "userProfiles", userCredential.user.uid),
+            {
+              email: userCredential.user.email,
+              name: name,
+            }
+          );
+        } catch (error) {
+          console.error("Error saving user");
+        }
       })
       .catch((error: any) => {
         if (error.code === "auth/email-already-in-use") {
@@ -40,9 +57,10 @@ export default function RegisterScreen() {
           flex: 0.3,
           alignItems: "center",
           justifyContent: "center",
-          marginBottom: 36,
+          marginBottom: 88,
         }}
       >
+        <CustomTextInput label="Name" onChangeText={setName} value={name} />
         <CustomTextInput label="Email" onChangeText={setEmail} value={email} />
         <CustomTextInput
           label="Password"

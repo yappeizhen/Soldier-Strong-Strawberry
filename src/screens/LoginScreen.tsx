@@ -7,7 +7,7 @@ import CustomButton from "../components/CustomButton";
 import CustomTextInput from "../components/CustomInputText";
 import CustomSnackBar from "../components/CustomSnackBar";
 import Colors from "../constants/Colors";
-import { auth } from "../firebase/firebase";
+import { firebaseAuth } from "../firebase/firebase";
 import useColorScheme from "../hooks/useColorScheme";
 
 export default function LoginScreen({ navigation }: any) {
@@ -19,7 +19,7 @@ export default function LoginScreen({ navigation }: any) {
   const [snackMessage, setSnackMessage] = useState<string>("");
 
   const handleLogin = () => {
-    signInWithEmailAndPassword(auth, email.trim(), password)
+    signInWithEmailAndPassword(firebaseAuth, email.trim(), password)
       .then((userCredential) => {
         const user = userCredential.user;
         console.log(user.email, "successfully signed in!");
@@ -27,12 +27,13 @@ export default function LoginScreen({ navigation }: any) {
       .catch((error: any) => {
         if (error.code === "auth/wrong-password") {
           setSnackMessage("Incorrect password");
-        } else if (error.code === "auth/invalid-email") {
+        } else if (error.code === "auth/invalid-email" || !email) {
           setSnackMessage("Invalid email");
         } else if (error.code === "auth/user-not-found") {
           setSnackMessage("User email not found");
         } else {
           setSnackMessage(error.message);
+          console.log(error);
         }
         setSnackIsVisible(true);
         // console.log(error.code);

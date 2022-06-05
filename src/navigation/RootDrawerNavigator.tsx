@@ -13,7 +13,7 @@ import {
 import { RootDrawerParamList } from "../../types";
 import DrawerMenuButton from "../components/DrawerMenuButton";
 import Colors from "../constants/Colors";
-import { auth } from "../firebase/firebase";
+import { firebaseAuth } from "../firebase/firebase";
 import { useAuthState } from "../hooks/useAuthState";
 import useColorScheme from "../hooks/useColorScheme";
 import AboutUsScreen from "../screens/AboutUsScreen";
@@ -25,7 +25,7 @@ const Drawer = createDrawerNavigator<RootDrawerParamList>();
 
 const renderAppStack = (colorScheme: NonNullable<ColorSchemeName>) => {
   const handleLogout = () => {
-    signOut(auth)
+    signOut(firebaseAuth)
       .then(() => {
         console.log("Successfully logged out");
       })
