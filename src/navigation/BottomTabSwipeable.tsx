@@ -4,9 +4,9 @@ import { FontAwesome } from "@expo/vector-icons";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 
 import { RootTabParamList } from "../../types";
-import TabOneScreen from "../screens/TabOneScreen";
-import TabThreeScreen from "../screens/TabThreeScreen";
-import TabTwoScreen from "../screens/TabTwoScreen";
+import TabOneScreen from "../screens/MyStatsScreen";
+import TabTwoScreen from "../screens/RunsScreen";
+import TabThreeScreen from "../screens/StaticsScreen";
 
 /**
  * This navigator is horizontally swipeable and can be placed at the top or bottom of the screen

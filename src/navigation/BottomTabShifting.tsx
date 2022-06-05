@@ -1,12 +1,18 @@
 import * as React from "react";
 
-import { FontAwesome } from "@expo/vector-icons";
+import {
+  AntDesign,
+  FontAwesome,
+  MaterialCommunityIcons,
+  MaterialIcons,
+} from "@expo/vector-icons";
 import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
 
 import { RootTabParamList } from "../../types";
-import TabOneScreen from "../screens/TabOneScreen";
-import TabThreeScreen from "../screens/TabThreeScreen";
-import TabTwoScreen from "../screens/TabTwoScreen";
+import IpptCalculatorScreen from "../screens/IpptCalculatorScreen";
+import MyStatsScreen from "../screens/MyStatsScreen";
+import RunsScreen from "../screens/RunsScreen";
+import StaticsScreen from "../screens/StaticsScreen";
 
 /**
  * A bottom tab navigator displays tab buttons on the bottom of the display to switch screens.
@@ -16,29 +22,65 @@ const BottomTab = createMaterialBottomTabNavigator<RootTabParamList>();
 
 export default function BottomTabShifting() {
   return (
-    <BottomTab.Navigator initialRouteName="TabOne" shifting={true}>
+    <BottomTab.Navigator initialRouteName="MyStats" shifting={true}>
       <BottomTab.Screen
-        name="TabOne"
-        component={TabOneScreen}
+        name="MyStats"
+        component={MyStatsScreen}
         options={{
-          title: "Tab One",
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
+          title: "My Stats",
+          tabBarIcon: ({ color }) => (
+            <AntDesign
+              name="dashboard"
+              color={color}
+              size={20}
+              style={{ marginBottom: -3 }}
+            />
+          ),
         }}
       />
       <BottomTab.Screen
-        name="TabTwo"
-        component={TabTwoScreen}
+        name="Runs"
+        component={RunsScreen}
         options={{
-          title: "Tab Two",
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
+          title: "Runs",
+          tabBarIcon: ({ color }) => (
+            <MaterialIcons
+              name="directions-run"
+              color={color}
+              size={20}
+              style={{ marginBottom: -3 }}
+            />
+          ),
         }}
       />
       <BottomTab.Screen
-        name="TabThree"
-        component={TabThreeScreen}
+        name="Statics"
+        component={StaticsScreen}
         options={{
-          title: "Tab Three",
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
+          title: "Statics",
+          tabBarIcon: ({ color }) => (
+            <MaterialCommunityIcons
+              name="arm-flex"
+              color={color}
+              size={20}
+              style={{ marginBottom: -3 }}
+            />
+          ),
+        }}
+      />
+      <BottomTab.Screen
+        name="Calculator"
+        component={IpptCalculatorScreen}
+        options={{
+          title: "IPPT Calculator",
+          tabBarIcon: ({ color }) => (
+            <AntDesign
+              name="calculator"
+              color={color}
+              size={20}
+              style={{ marginBottom: -3 }}
+            />
+          ),
         }}
       />
     </BottomTab.Navigator>
@@ -48,9 +90,3 @@ export default function BottomTabShifting() {
 /**
  * You can explore the built-in icon families and icons on the web at https://icons.expo.fyi/
  */
-function TabBarIcon(props: {
-  name: React.ComponentProps<typeof FontAwesome>["name"];
-  color: string;
-}) {
-  return <FontAwesome size={20} style={{ marginBottom: -3 }} {...props} />;
-}
