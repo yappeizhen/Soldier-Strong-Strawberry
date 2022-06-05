@@ -34,9 +34,10 @@ export type HomeStackScreenProps<Screen extends keyof HomeStackParamList> =
   NativeStackScreenProps<HomeStackParamList, Screen>;
 
 export type RootTabParamList = {
-  TabOne: undefined;
-  TabTwo: undefined;
-  TabThree: undefined;
+  MyStats: undefined;
+  Runs: undefined;
+  Statics: undefined;
+  Calculator: undefined;
 };
 
 export type RootTabScreenProps<Screen extends keyof RootTabParamList> =
