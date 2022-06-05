@@ -9,6 +9,8 @@ export default {
     tabIconDefault: '#ccc',
     tabIconSelected: tintColorLight,
   },
+  
+  // Redundant --> Color scheme has been fixed to light mode
   dark: {
     text: '#fff',
     background: '#000',
