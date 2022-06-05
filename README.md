@@ -1,7 +1,6 @@
 # Strawberry-Brainhack2022
 
 ## Features
-- [x] Light and dark themes that match native system display
 - [x] Swipeable bottom tab navigation (default)
 - [x] Shifting bottom tab navigation
 - [x] Stack navigation and modal
@@ -11,7 +10,6 @@
 - [x] Basic log in and log out
 - [x] Input validation
 - [x] Success and error messages
-- [ ] Loading pages
 
 ## Getting Started
 
