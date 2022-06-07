@@ -32,6 +32,8 @@ export default function RegisterScreen() {
             {
               email: userCredential.user.email,
               name: name,
+              pushups: [],
+              situps: [],
             }
           );
         } catch (error) {
