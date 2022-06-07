@@ -2,8 +2,12 @@ import { doc, onSnapshot } from "firebase/firestore";
 import { useEffect } from "react";
 import { useState } from "react";
 import { StyleSheet } from "react-native";
-import { Card } from "react-native-paper";
+import { Card, DataTable } from "react-native-paper";
 
+import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { map } from "@firebase/util";
+
+import CustomButton from "../components/CustomButton";
 import { ScrollView, Text, View } from "../components/Themed";
 import { FirestoreStaticStat, StaticStat } from "../constants/Types";
 import { firebaseFirestore } from "../firebase/firebase";
@@ -86,13 +90,38 @@ export default function StaticsScreen() {
     if (!staticData || staticData.length === 0) {
       return <Text>Start a new session and track your progress here!</Text>;
     } else {
-      return staticData.map((item, index) => {
-        return (
-          <Text key={index}>
-            {index + 1}: {item.number}, {item.date.toLocaleString()}
-          </Text>
-        );
-      });
+      return (
+        <DataTable>
+          <DataTable.Header>
+            <DataTable.Title style={styles.tableCrownCell}>
+              <MaterialCommunityIcons
+                name="crown-outline"
+                size={24}
+                color="gold"
+              />
+            </DataTable.Title>
+            <DataTable.Title style={styles.tableScoreCell}>
+              Score
+            </DataTable.Title>
+            <DataTable.Title style={styles.tableDateCell}>Date</DataTable.Title>
+          </DataTable.Header>
+          {staticData.map((item, index) => {
+            return (
+              <DataTable.Row>
+                <DataTable.Cell style={styles.tableCrownCell}>
+                  {index + 1}
+                </DataTable.Cell>
+                <DataTable.Cell style={styles.tableScoreCell}>
+                  {item.number}
+                </DataTable.Cell>
+                <DataTable.Cell style={styles.tableDateCell}>
+                  {item.date.toLocaleDateString()}
+                </DataTable.Cell>
+              </DataTable.Row>
+            );
+          })}
+        </DataTable>
+      );
     }
   };
   return (
@@ -106,11 +135,21 @@ export default function StaticsScreen() {
         />
         <Card style={styles.card}>
           <Card.Title title="Push Ups" subtitle="Highscores" />
-          <Card.Content>{renderStaticsData("pushups")}</Card.Content>
+          <Card.Content>
+            {renderStaticsData("pushups")}
+            <CustomButton style={styles.button} onPress={() => {}}>
+              Start new session
+            </CustomButton>
+          </Card.Content>
         </Card>
         <Card style={styles.card}>
           <Card.Title title="Sit Ups" subtitle="Highscores" />
-          <Card.Content>{renderStaticsData("situps")}</Card.Content>
+          <Card.Content>
+            {renderStaticsData("situps")}
+            <CustomButton style={styles.button} onPress={() => {}}>
+              Start new session
+            </CustomButton>
+          </Card.Content>
         </Card>
       </View>
     </ScrollView>
@@ -118,6 +157,18 @@ export default function StaticsScreen() {
 }
 
 const styles = StyleSheet.create({
+  tableCrownCell: {
+    flex: 0.3,
+  },
+  tableScoreCell: {
+    flex: 0.3,
+  },
+  tableDateCell: {
+    flex: 0.45,
+  },
+  button: {
+    marginTop: 24,
+  },
   card: {
     width: "80%",
     marginBottom: 20,
