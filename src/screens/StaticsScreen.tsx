@@ -1,4 +1,5 @@
 import { doc, onSnapshot } from "firebase/firestore";
+import { useEffect } from "react";
 import { useState } from "react";
 import { StyleSheet } from "react-native";
 import { Card } from "react-native-paper";
@@ -13,52 +14,68 @@ export default function StaticsScreen() {
   const [situpData, setSitupData] = useState<StaticStat[]>([]);
 
   const { user } = useAuthState();
-  if (user) {
-    onSnapshot(doc(firebaseFirestore, "userProfiles", user.uid), (snapshot) => {
-      const pushupArray: StaticStat[] = [];
-      if (snapshot.exists()) {
-        snapshot
-          .data()
-          .pushups?.sort((a: FirestoreStaticStat, b: FirestoreStaticStat) => {
-            if (b.number === a.number) {
-              // If the score is the same, show the more recent one first
-              if (a.date.toDate() > b.date.toDate()) {
-                return -1;
-              } else {
-                return 1;
-              }
-            }
-            return b.number - a.number; // Sort by decreasing number of pushups per session
-          })
-          .slice(0, 3) // Get only the top 3 results
-          .forEach((stat: FirestoreStaticStat) => {
-            pushupArray.push({ number: stat.number, date: stat.date.toDate() });
-          });
-        setPushupData(pushupArray);
+  useEffect(() => {
+    const unsubscribe = () => {
+      if (user) {
+        const userProfileRef = doc(firebaseFirestore, "userProfiles", user.uid);
+        onSnapshot(userProfileRef, (snapshot) => {
+          const pushupArray: StaticStat[] = [];
+          if (snapshot.exists()) {
+            snapshot
+              .data()
+              .pushups?.sort(
+                (a: FirestoreStaticStat, b: FirestoreStaticStat) => {
+                  if (b.number === a.number) {
+                    // If the score is the same, show the more recent one first
+                    if (a.date.toDate() > b.date.toDate()) {
+                      return -1;
+                    } else {
+                      return 1;
+                    }
+                  }
+                  return b.number - a.number; // Sort by decreasing number of pushups per session
+                }
+              )
+              .slice(0, 3) // Get only the top 3 results
+              .forEach((stat: FirestoreStaticStat) => {
+                pushupArray.push({
+                  number: stat.number,
+                  date: stat.date.toDate(),
+                });
+              });
+            setPushupData(pushupArray);
 
-        // Get Situps Data
-        const situpArray: StaticStat[] = [];
-        snapshot
-          .data()
-          .situps?.sort((a: FirestoreStaticStat, b: FirestoreStaticStat) => {
-            if (b.number === a.number) {
-              // If the score is the same, show the more recent one first
-              if (a.date.toDate() > b.date.toDate()) {
-                return -1;
-              } else {
-                return 1;
-              }
-            }
-            return b.number - a.number; // Sort by decreasing number of pushups per session
-          })
-          .slice(0, 3) // Get only the top 3 results
-          .forEach((stat: FirestoreStaticStat) => {
-            situpArray.push({ number: stat.number, date: stat.date.toDate() });
-          });
-        setSitupData(situpArray);
+            // Get Situps Data
+            const situpArray: StaticStat[] = [];
+            snapshot
+              .data()
+              .situps?.sort(
+                (a: FirestoreStaticStat, b: FirestoreStaticStat) => {
+                  if (b.number === a.number) {
+                    // If the score is the same, show the more recent one first
+                    if (a.date.toDate() > b.date.toDate()) {
+                      return -1;
+                    } else {
+                      return 1;
+                    }
+                  }
+                  return b.number - a.number; // Sort by decreasing number of pushups per session
+                }
+              )
+              .slice(0, 3) // Get only the top 3 results
+              .forEach((stat: FirestoreStaticStat) => {
+                situpArray.push({
+                  number: stat.number,
+                  date: stat.date.toDate(),
+                });
+              });
+            setSitupData(situpArray);
+          }
+        });
       }
-    });
-  }
+    };
+    return unsubscribe();
+  }, []);
   const renderStaticsData = (type: "pushups" | "situps") => {
     let staticData;
     if (type === "pushups") {
