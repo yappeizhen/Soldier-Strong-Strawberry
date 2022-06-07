@@ -78,7 +78,7 @@ export default function StaticsScreen({ navigation }: any) {
       }
     };
     return unsubscribe();
-  }, []);
+  }, [user]);
   const renderStaticsData = (type: "pushups" | "situps") => {
     let staticData;
     if (type === "pushups") {
