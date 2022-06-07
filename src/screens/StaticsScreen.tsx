@@ -106,7 +106,7 @@ export default function StaticsScreen({ navigation }: any) {
           </DataTable.Header>
           {staticData.map((item, index) => {
             return (
-              <DataTable.Row>
+              <DataTable.Row key={index}>
                 <DataTable.Cell style={styles.tableCrownCell}>
                   {index + 1}
                 </DataTable.Cell>
