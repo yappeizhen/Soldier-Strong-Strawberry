@@ -12,7 +12,7 @@ import { FirestoreStaticStat, StaticStat } from "../constants/Types";
 import { firebaseFirestore } from "../firebase/firebase";
 import { useAuthState } from "../hooks/useAuthState";
 
-export default function StaticsScreen({ navigation }) {
+export default function StaticsScreen({ navigation }: any) {
   const [pushupData, setPushupData] = useState<StaticStat[]>([]);
   const [situpData, setSitupData] = useState<StaticStat[]>([]);
 
