@@ -5,7 +5,6 @@ import { StyleSheet } from "react-native";
 import { Card, DataTable } from "react-native-paper";
 
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import { map } from "@firebase/util";
 
 import CustomButton from "../components/CustomButton";
 import { ScrollView, Text, View } from "../components/Themed";
@@ -13,7 +12,7 @@ import { FirestoreStaticStat, StaticStat } from "../constants/Types";
 import { firebaseFirestore } from "../firebase/firebase";
 import { useAuthState } from "../hooks/useAuthState";
 
-export default function StaticsScreen() {
+export default function StaticsScreen({ navigation }) {
   const [pushupData, setPushupData] = useState<StaticStat[]>([]);
   const [situpData, setSitupData] = useState<StaticStat[]>([]);
 
@@ -137,7 +136,12 @@ export default function StaticsScreen() {
           <Card.Title title="Push Ups" subtitle="Highscores" />
           <Card.Content>
             {renderStaticsData("pushups")}
-            <CustomButton style={styles.button} onPress={() => {}}>
+            <CustomButton
+              style={styles.button}
+              onPress={() => {
+                navigation.navigate("Pushups");
+              }}
+            >
               Start new session
             </CustomButton>
           </Card.Content>
@@ -146,7 +150,12 @@ export default function StaticsScreen() {
           <Card.Title title="Sit Ups" subtitle="Highscores" />
           <Card.Content>
             {renderStaticsData("situps")}
-            <CustomButton style={styles.button} onPress={() => {}}>
+            <CustomButton
+              style={styles.button}
+              onPress={() => {
+                navigation.navigate("Situps");
+              }}
+            >
               Start new session
             </CustomButton>
           </Card.Content>
