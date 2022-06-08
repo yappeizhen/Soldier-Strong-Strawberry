@@ -8,7 +8,6 @@ import ModalScreen from "../screens/ModalScreen";
 import NotFoundScreen from "../screens/NotFoundScreen";
 import { toggles } from "../toggles";
 import BottomTabShifting from "./BottomTabShifting";
-import BottomTabSwipeable from "./BottomTabSwipeable";
 
 /**
  * A root stack navigator is often used for displaying modals on top of all other content.
@@ -16,11 +15,7 @@ import BottomTabSwipeable from "./BottomTabSwipeable";
  */
 const Stack = createNativeStackNavigator<HomeStackParamList>();
 const renderTabNavigatorType = () => {
-  if (toggles.homeTabLayout === "shifting") {
-    return BottomTabShifting;
-  } else {
-    return BottomTabSwipeable;
-  }
+  return BottomTabShifting;
 };
 
 export default function HomeStackNavigator() {

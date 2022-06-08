@@ -16,6 +16,12 @@ declare global {
   }
 }
 
+export type StaticsStackParamList = {
+  Statics: undefined;
+  Pushups: undefined;
+  Situps: undefined;
+};
+
 export type AuthStackParamList = {
   Login: undefined;
   Register: undefined;
@@ -36,7 +42,7 @@ export type HomeStackScreenProps<Screen extends keyof HomeStackParamList> =
 export type RootTabParamList = {
   MyStats: undefined;
   Runs: undefined;
-  Statics: undefined;
+  StaticsStack: undefined;
   Calculator: undefined;
 };
 
@@ -49,7 +55,7 @@ export type RootTabScreenProps<Screen extends keyof RootTabParamList> =
 export type RootDrawerParamList = {
   AuthStack: undefined;
   Root: undefined;
-  AboutUs: undefined;
+  EditProfile: undefined;
 };
 
 export type RootDrawerScreenProps<Screen extends keyof RootDrawerParamList> =

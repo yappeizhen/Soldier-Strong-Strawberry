@@ -13,6 +13,7 @@ import IpptCalculatorScreen from "../screens/IpptCalculatorScreen";
 import MyStatsScreen from "../screens/MyStatsScreen";
 import RunsScreen from "../screens/RunsScreen";
 import StaticsScreen from "../screens/StaticsScreen";
+import StaticsStackNavigator from "./StaticsStackNavigator";
 
 /**
  * A bottom tab navigator displays tab buttons on the bottom of the display to switch screens.
@@ -54,8 +55,8 @@ export default function BottomTabShifting() {
         }}
       />
       <BottomTab.Screen
-        name="Statics"
-        component={StaticsScreen}
+        name="StaticsStack"
+        component={StaticsStackNavigator}
         options={{
           title: "Statics",
           tabBarIcon: ({ color }) => (
