@@ -8,7 +8,7 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 import CustomButton from "../components/CustomButton";
 import { ScrollView, Text, View } from "../components/Themed";
-import { FirestoreStaticStat, StaticStat } from "../constants/Types";
+import { FirestoreStaticStat, StaticStat } from "../constants/Models";
 import { firebaseFirestore } from "../firebase/firebase";
 import { useAuthState } from "../hooks/useAuthState";
 

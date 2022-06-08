@@ -32,8 +32,14 @@ export default function RegisterScreen() {
             {
               email: userCredential.user.email,
               name: name,
+              birthday: null,
+              mostRecentIpptScore: null,
+              vocation: null,
+              intendedIpptDate: null,
+              trainingPlan: [],
               pushups: [],
               situps: [],
+              runningData: [],
             }
           );
         } catch (error) {
