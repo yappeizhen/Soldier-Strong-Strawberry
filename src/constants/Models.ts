@@ -3,17 +3,17 @@ import { Timestamp } from "firebase/firestore";
 export type UserProfileData = {
     email: string,
     name: string,
-    birthday: Date,
+    birthday: Date | null,
     isMale: boolean,
-    mostRecentIpptScore: number,
+    mostRecentIpptScore: number | null,
     isDiverCommandoGuards: boolean,
-    intendedIpptDate: Date,
-    trainingPlan: [],
+    intendedIpptDate: Date | null,
+    trainingPlan: TrainingItem[],
     pushups: StaticStat[],
     situps: StaticStat[],
     runningData: RunningStat[],
 }
-export type TrainingPlan = {
+export type TrainingItem = {
     item: string,
     isComplete: boolean
 }

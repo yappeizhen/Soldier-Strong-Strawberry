@@ -55,7 +55,7 @@ export type RootTabScreenProps<Screen extends keyof RootTabParamList> =
 export type RootDrawerParamList = {
   AuthStack: undefined;
   Root: undefined;
-  AboutUs: undefined;
+  EditProfile: undefined;
 };
 
 export type RootDrawerScreenProps<Screen extends keyof RootDrawerParamList> =
