@@ -1,0 +1,5 @@
+numpy
+cv2
+mss
+PIL
+mediapipe
