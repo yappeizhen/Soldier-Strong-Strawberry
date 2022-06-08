@@ -4,6 +4,7 @@ export type UserProfileData = {
     email: string,
     name: string,
     birthday: Date,
+    isMale: boolean,
     mostRecentIpptScore: number,
     isDiverCommandoGuards: boolean,
     intendedIpptDate: Date,
