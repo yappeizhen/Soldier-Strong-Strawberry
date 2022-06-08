@@ -9,6 +9,8 @@ import Colors from "../constants/Colors";
 import useColorScheme from "../hooks/useColorScheme";
 
 export type Props = {
+  disabled?: boolean;
+  editable?: boolean;
   mode?: "outlined" | "flat" | undefined;
   label?: TextInputLabelProp | undefined;
   placeholder?: string | undefined;
@@ -20,20 +22,26 @@ export type Props = {
   style?: any;
   value?: string | undefined;
   onChangeText: Dispatch<SetStateAction<string>>;
+  onPressIn?: () => void;
+  keyboardType?: any;
 };
 
 export default function CustomTextInput({
   activeColor,
+  disabled = false,
+  editable = true,
   inactiveColor,
   label,
   mode = "flat",
   onChangeText,
+  onPressIn,
   placeholder,
   placeholderTextColor,
   secureTextEntry = false,
   style,
   textColor,
   value,
+  keyboardType
 }: Props) {
   const colorScheme = useColorScheme();
   activeColor = activeColor ?? Colors[colorScheme].tint;
@@ -51,9 +59,12 @@ export default function CustomTextInput({
   return (
     <TextInput
       activeUnderlineColor={activeColor}
+      disabled={disabled}
+      editable={editable}
       label={label}
       mode={mode}
       onChangeText={onChangeText}
+      onPressIn={onPressIn}
       placeholder={placeholder}
       placeholderTextColor={placeholder}
       secureTextEntry={secureTextEntry}
@@ -66,6 +77,7 @@ export default function CustomTextInput({
       }}
       underlineColor={inactiveColor}
       value={value}
+      keyboardType={keyboardType}
     />
   );
 }
