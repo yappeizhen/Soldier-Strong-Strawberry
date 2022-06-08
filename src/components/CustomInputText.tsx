@@ -24,6 +24,7 @@ export type Props = {
   onChangeText: Dispatch<SetStateAction<string>>;
   onPressIn?: () => void;
   keyboardType?: any;
+  maxLength?: number | undefined;
 };
 
 export default function CustomTextInput({
@@ -41,7 +42,8 @@ export default function CustomTextInput({
   style,
   textColor,
   value,
-  keyboardType
+  keyboardType,
+  maxLength
 }: Props) {
   const colorScheme = useColorScheme();
   activeColor = activeColor ?? Colors[colorScheme].tint;
@@ -69,6 +71,7 @@ export default function CustomTextInput({
       placeholderTextColor={placeholder}
       secureTextEntry={secureTextEntry}
       style={[styles.customInputText, style]}
+      maxLength={maxLength}
       theme={{
         colors: {
           placeholder: inactiveColor,
