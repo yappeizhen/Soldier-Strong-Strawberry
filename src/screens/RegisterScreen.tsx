@@ -7,6 +7,7 @@ import { StyleSheet, View } from "react-native";
 import CustomButton from "../components/CustomButton";
 import CustomTextInput from "../components/CustomInputText";
 import CustomSnackBar from "../components/CustomSnackBar";
+import { UserProfileData } from "../constants/Models";
 import { firebaseAuth, firebaseFirestore } from "../firebase/firebase";
 
 export default function RegisterScreen() {
@@ -27,17 +28,25 @@ export default function RegisterScreen() {
       .then((userCredential) => {
         console.log(userCredential.user.email, "signed in successfully");
         try {
+          const newUserProfile: UserProfileData = {
+            email: userCredential.user.email!,
+            name: name,
+            birthday: null,
+            isMale: true,
+            mostRecentIpptScore: null,
+            isDiverCommandoGuards: false,
+            intendedIpptDate: null,
+            trainingPlan: [],
+            pushups: [],
+            situps: [],
+            runningData: [],
+          };
           setDoc(
             doc(firebaseFirestore, "userProfiles", userCredential.user.uid),
-            {
-              email: userCredential.user.email,
-              name: name,
-              pushups: [],
-              situps: [],
-            }
+            newUserProfile
           );
-        } catch (error) {
-          console.error("Error saving user");
+        } catch (error: any) {
+          console.error("Error saving user: ", error.message);
         }
       })
       .catch((error: any) => {

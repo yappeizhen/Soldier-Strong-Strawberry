@@ -16,7 +16,7 @@ import Colors from "../constants/Colors";
 import { firebaseAuth } from "../firebase/firebase";
 import { useAuthState } from "../hooks/useAuthState";
 import useColorScheme from "../hooks/useColorScheme";
-import AboutUsScreen from "../screens/AboutUsScreen";
+import EditProfileScreen from "../screens/EditProfileScreen";
 import { toggles } from "../toggles";
 import AuthStackNavigator from "./AuthStackNavigator";
 import HomeStackNavigator from "./HomeStackNavigator";
@@ -97,13 +97,13 @@ const renderAppStack = (colorScheme: NonNullable<ColorSchemeName>) => {
         })}
       />
       <Drawer.Screen
-        name="AboutUs"
-        component={AboutUsScreen}
+        name="EditProfile"
+        component={EditProfileScreen}
         options={{
           drawerIcon: ({ color }) => (
             <Ionicons name="people-outline" size={20} color={color} />
           ),
-          title: "About Us",
+          title: "Profile",
         }}
       />
     </Drawer.Navigator>
