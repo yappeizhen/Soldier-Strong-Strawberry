@@ -41,9 +41,12 @@
     "expo-web-browser": "~10.2.0",
     "firebase": "^9.8.1",
     "font-awesome": "^4.7.0",
+    "moment": "^2.29.3",
     "react": "17.0.2",
+    "react-countdown": "^2.3.2",
     "react-dom": "17.0.2",
     "react-native": "0.68.2",
+    "react-native-countdown-component": "^2.7.1",
     "react-native-gesture-handler": "~2.2.1",
     "react-native-modal-datetime-picker": "^13.1.2",
     "react-native-pager-view": "5.4.15",
@@ -54,12 +57,14 @@
     "react-native-svg-transformer": "^1.0.0",
     "react-native-tab-view": "^3.1.1",
     "react-native-vector-icons": "^9.1.0",
-    "react-native-web": "0.17.7"
+    "react-native-web": "0.17.7",
+    "uninstall": "^0.0.0"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",
     "@types/react": "~17.0.21",
     "@types/react-native": "~0.66.13",
+    "@types/react-native-countdown-component": "^2.7.0",
     "jest": "^26.6.3",
     "jest-expo": "~45.0.0",
     "react-test-renderer": "17.0.2",
