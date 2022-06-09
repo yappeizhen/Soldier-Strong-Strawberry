@@ -13,6 +13,8 @@ import { useAuthState } from "../hooks/useAuthState";
 import Colors from "../constants/Colors";
 import useColorScheme from "../hooks/useColorScheme";
 import EditScreenInfo from "../components/EditScreenInfo";
+import { FirestoreStaticStat, StaticStat } from "../constants/Models";
+
 
 
 
@@ -21,13 +23,86 @@ export default function IpptCalculatorScreen() {
 
   const [snackBarMessage, setSnackBarMessage] = useState<string>("");
   const [isSnackBarVisible, setIsSnackBarVisible] = useState<boolean>(false);
-  const [pushups, setPushups] = useState<string>("");
-  const [situps, setSitups] = useState<string>("");
-  const [runtime, setRuntime] = useState<string>("");
+  const [pushups, setPushups] = useState<number>();
+  const [situps, setSitups] = useState<number>();
+  const [runtime, setRuntime] = useState<number>();
+  const [totalScore, setTotalScore] = useState<number>();
+
+  const pushupTable = require('../constants/ippt/pushup.json');
+  const situpTable = require('../constants/ippt/situp.json');
+  const runningTable = require('../constants/ippt/run.json');
 
   const { user } = useAuthState();
 
+  useEffect(() => {
+    const unsubscribe = () => {
+      if (user) {
+        const userProfileRef = doc(firebaseFirestore, "userProfiles", user.uid);
+        onSnapshot(userProfileRef, (snapshot) => {
+          if (snapshot.exists()) {
+
+            let pushupRecent = snapshot
+            .data()
+            .pushups?.sort(
+              (a: FirestoreStaticStat, b: FirestoreStaticStat) => {
+                if (b.date.toDate() === a.date.toDate()) {
+                  // If the score is the same, show the more recent one first
+                  return b.number - a.number;
+                }
+                return b.date.toDate() === a.date.toDate(); // Sort by decreasing number of pushups per session
+              }
+            ).at(0);
+            
+            pushupRecent = pushupRecent == undefined ? 0 : pushupRecent;
+
+            let situpRecent = snapshot
+            .data()
+            .situps?.sort(
+              (a: FirestoreStaticStat, b: FirestoreStaticStat) => {
+                if (b.date.toDate() === a.date.toDate()) {
+                  // If the score is the same, show the more recent one first
+                  return b.number - a.number;
+                }
+                return b.date.toDate() === a.date.toDate(); // Sort by decreasing number of pushups per session
+              }
+            ).at(0);
+            
+            situpRecent = situpRecent == undefined ? 0 : situpRecent;
+            
+            let runtime = snapshot
+            .data()
+            .situps?.sort(
+              (a: FirestoreStaticStat, b: FirestoreStaticStat) => {
+                if (b.date.toDate() === a.date.toDate()) {
+                  // If the score is the same, show the more recent one first
+                  return b.number - a.number;
+                }
+                return b.date.toDate() === a.date.toDate(); // Sort by decreasing number of pushups per session
+              }
+            ).at(0);
+            
+            runtime = runtime == undefined ? 1200 : runtime;
+
+            // sort the values for pushup/situp/runtime by recency
+            setPushups(pushupRecent);
+            setSitups(situpRecent);
+            setRuntime(runtime);
+          }
+        });
+      }
+    };
+    return unsubscribe();
+  }, [user]);
+
   const colorScheme = useColorScheme();
+
+  // create a new function to calculate score
+  const calculateScore = () => {
+    let pushUpScore = 0;
+    let sitUpScore = 0;
+    let runningScore = 0;
+    setTotalScore(0);
+  }
 
   return (
     <ScrollView style={styles.container}>
@@ -115,8 +190,10 @@ const stylesRun = StyleSheet.create({
   card: {
     width: "40%",
     // borderWidth: 5,
+    padding: 0,
     margin: -5,
-    marginTop: -15
+    marginTop: -15,
+    height: 52
   },
   cardLeft: {
     marginLeft: "5%",
@@ -129,12 +206,14 @@ const stylesRun = StyleSheet.create({
     flexDirection:"row",
     flex: 1,
     // borderWidth: 5,
-    marginLeft: -10
+    marginLeft: -10,
+    padding: 0,
   },
   cardMain: {
     elevation: 0,
   	shadowOpacity: 0,
     // borderWidth: 5,
-    margin: 0
+    margin: 0,
+    padding: 0,
   }
 });
