@@ -152,11 +152,12 @@ export default function EditProfileScreen() {
         label="Birthday"
         value={birthday ? birthday.toDateString() : birthday}
         onChangeText={() => {}}
-        onPressIn={() => setIsBirthdayModalOpen(true)}
+        onPressIn={() => setIsBirthdayModalOpen(true && isEditingMode)}
       />
       <DateTimePickerModal
-        isVisible={isBirthdayModalOpen}
+        isVisible={isBirthdayModalOpen && isEditingMode}
         mode="date"
+        date={birthday}
         onCancel={() => {
           setIsBirthdayModalOpen(false);
         }}
@@ -242,11 +243,12 @@ export default function EditProfileScreen() {
           intendedIpptDate ? intendedIpptDate.toDateString() : intendedIpptDate
         }
         onChangeText={() => {}}
-        onPressIn={() => setIsTargetIpptDateModalOpen(true)}
+        onPressIn={() => setIsTargetIpptDateModalOpen(true && isEditingMode)}
       />
       <DateTimePickerModal
-        isVisible={isTargetIpptDateModalOpen}
+        isVisible={isTargetIpptDateModalOpen && isEditingMode}
         mode="date"
+        date={intendedIpptDate}
         onCancel={() => {
           setIsTargetIpptDateModalOpen(false);
         }}

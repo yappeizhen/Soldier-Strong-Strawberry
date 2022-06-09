@@ -43,7 +43,7 @@ export default function CustomTextInput({
   textColor,
   value,
   keyboardType,
-  maxLength
+  maxLength,
 }: Props) {
   const colorScheme = useColorScheme();
   activeColor = activeColor ?? Colors[colorScheme].tint;
@@ -61,6 +61,7 @@ export default function CustomTextInput({
   return (
     <TextInput
       activeUnderlineColor={activeColor}
+      activeOutlineColor={activeColor}
       disabled={disabled}
       editable={editable}
       label={label}

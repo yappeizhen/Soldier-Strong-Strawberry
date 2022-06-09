@@ -10,7 +10,7 @@ import { createMaterialBottomTabNavigator } from "@react-navigation/material-bot
 
 import { RootTabParamList } from "../../types";
 import IpptCalculatorScreen from "../screens/IpptCalculatorScreen";
-import MyStatsScreen from "../screens/MyStatsScreen";
+import MyStatsScreen from "../screens/MyStats/MyStatsScreen";
 import RunsScreen from "../screens/RunsScreen";
 import StaticsScreen from "../screens/StaticsScreen";
 import StaticsStackNavigator from "./StaticsStackNavigator";
