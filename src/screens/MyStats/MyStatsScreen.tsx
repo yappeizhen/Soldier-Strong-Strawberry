@@ -28,6 +28,7 @@ export default function MyStatsScreen({ navigation }: any) {
             nextCycle.setFullYear(currentYear + 1);
             if (thisCycle <= new Date()) {
               thisCycle = nextCycle;
+              thisCycle.setMinutes(0);
             }
             setTargetIPPTDate(snapshot.data().intendedIpptDate?.toDate());
             setEndOfCycleDate(thisCycle);
