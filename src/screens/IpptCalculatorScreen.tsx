@@ -26,6 +26,7 @@ export default function IpptCalculatorScreen() {
   const [pushups, setPushups] = useState<number>();
   const [situps, setSitups] = useState<number>();
   const [runtime, setRuntime] = useState<number>();
+  const [age, setAge] = useState<number>();
   const [totalScore, setTotalScore] = useState<number>();
 
   const pushupTable = require('../constants/ippt/pushup.json');
@@ -83,10 +84,22 @@ export default function IpptCalculatorScreen() {
             
             runtime = runtime == undefined ? 1200 : runtime;
 
+            let birthday: Date = snapshot.data().birthday?.toDate();
+            const currDate : Date = new Date(); 
+            let yearsDiff = birthday.getFullYear() - currDate.getFullYear();
+            if (currDate.getMonth() < birthday.getMonth()) {
+            //get months when current month is greater  
+              yearsDiff--;
+            } else if (currDate.getMonth() == birthday.getMonth() && 
+            currDate.getDay() > birthday.getDay()) {
+              yearsDiff--;
+            }
+            
             // sort the values for pushup/situp/runtime by recency
             setPushups(pushupRecent);
             setSitups(situpRecent);
             setRuntime(runtime);
+            setAge(yearsDiff);
           }
         });
       }
