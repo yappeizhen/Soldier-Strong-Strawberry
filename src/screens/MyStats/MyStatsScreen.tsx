@@ -58,13 +58,12 @@ export default function MyStatsScreen({ navigation }: any) {
             />
             <CountDown
               until={findHoursDiff(endOfCycleDate)}
-              //formate to show
-              onFinish={() => alert("finished")}
-              //on Finish call
-              onPress={() => alert("hello")}
-              //on Press call
+              onFinish={() =>
+                alert("Happy Birthday!! It's the end of yor IPPT cycle :)")
+              }
               size={20}
-              digitStyle={{ backgroundColor: "#90c2e0" }}
+              digitTxtStyle={{ fontWeight: "400" }}
+              digitStyle={{ backgroundColor: "#266d9a" }}
             />
           </Card>
         ) : (
@@ -78,13 +77,11 @@ export default function MyStatsScreen({ navigation }: any) {
             />
             <CountDown
               until={findHoursDiff(targetIPPTDate)}
-              //formate to show
-              onFinish={() => alert("finished")}
-              //on Finish call
-              onPress={() => alert("hello")}
+              onFinish={() => alert("D-Day!!")}
               //on Press call
               size={20}
-              digitStyle={{ backgroundColor: "#90c2e0" }}
+              digitTxtStyle={{ fontWeight: "400" }}
+              digitStyle={{ backgroundColor: "#266d9a" }}
             />
           </Card>
         ) : (
