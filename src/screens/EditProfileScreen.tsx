@@ -157,6 +157,7 @@ export default function EditProfileScreen() {
       <DateTimePickerModal
         isVisible={isBirthdayModalOpen && isEditingMode}
         mode="date"
+        date={birthday}
         onCancel={() => {
           setIsBirthdayModalOpen(false);
         }}
@@ -247,6 +248,7 @@ export default function EditProfileScreen() {
       <DateTimePickerModal
         isVisible={isTargetIpptDateModalOpen && isEditingMode}
         mode="date"
+        date={intendedIpptDate}
         onCancel={() => {
           setIsTargetIpptDateModalOpen(false);
         }}
