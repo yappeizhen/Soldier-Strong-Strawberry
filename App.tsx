@@ -1,4 +1,5 @@
 import { StatusBar } from "expo-status-bar";
+import { Provider } from "react-native-paper";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 
 import {
@@ -21,13 +22,15 @@ export default function App() {
   } else {
     return (
       <SafeAreaProvider>
-        <NavigationContainer
-          linking={LinkingConfiguration}
-          theme={colorScheme === "dark" ? DarkTheme : DefaultTheme}
-        >
-          <RootDrawerNavigator />
-        </NavigationContainer>
-        <StatusBar />
+        <Provider>
+          <NavigationContainer
+            linking={LinkingConfiguration}
+            theme={colorScheme === "dark" ? DarkTheme : DefaultTheme}
+          >
+            <RootDrawerNavigator />
+          </NavigationContainer>
+          <StatusBar />
+        </Provider>
       </SafeAreaProvider>
     );
   }
