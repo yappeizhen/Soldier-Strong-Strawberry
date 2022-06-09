@@ -12,14 +12,14 @@ import {
   MaterialCommunityIcons,
 } from "@expo/vector-icons";
 
-import CustomTextInput from "../components/CustomInputText";
-import { ScrollView, Text, View } from "../components/Themed";
-import Colors from "../constants/Colors";
-import { TrainingItem } from "../constants/Models";
-import { firebaseFirestore } from "../firebase/firebase";
-import { useAuthState } from "../hooks/useAuthState";
+import CustomTextInput from "../../components/CustomInputText";
+import { ScrollView, Text, View } from "../../components/Themed";
+import Colors from "../../constants/Colors";
+import { TrainingItem } from "../../constants/Models";
+import { firebaseFirestore } from "../../firebase/firebase";
+import { useAuthState } from "../../hooks/useAuthState";
 
-export default function MyStatsScreen({ navigation }: any) {
+export default function TrainingPlan() {
   const [trainingPlan, setTrainingPlan] = useState<TrainingItem[]>([]);
   const [newTrainingItemName, setNewTrainingItemName] = useState<string>("");
   const [isTrainingDeleteMode, setIsTrainingDeleteMode] =
@@ -121,7 +121,6 @@ export default function MyStatsScreen({ navigation }: any) {
       });
   };
   return (
-    <ScrollView>
       <View style={styles.container}>
         <Card style={styles.card}>
           <Card.Title
@@ -190,7 +189,6 @@ export default function MyStatsScreen({ navigation }: any) {
           </Card.Content>
         </Card>
       </View>
-    </ScrollView>
   );
 }
 
@@ -200,7 +198,6 @@ const styles = StyleSheet.create({
   },
   card: {
     width: "80%",
-    marginBottom: 20,
     marginTop: 20,
   },
   container: {
