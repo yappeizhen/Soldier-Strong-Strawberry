@@ -73,7 +73,17 @@
     "react-native-tab-view": "^3.1.1",
     "react-native-vector-icons": "^9.1.0",
     "react-native-web": "0.17.7",
+<<<<<<< HEAD
     "uninstall": "^0.0.0"
+=======
+    "uninstall": "^0.0.0",
+<<<<<<< HEAD
+    "expo-camera": "~12.2.0"
+=======
+    "webpack-dev-server": "~3.11.0",
+    "@expo/webpack-config": "~0.16.2"
+>>>>>>> 1c6e4e4 (first commit)
+>>>>>>> 7db07ee (first commit)
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",
