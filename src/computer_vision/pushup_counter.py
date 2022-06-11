@@ -86,20 +86,20 @@ while True:
         
         #Percentage of success of pushup
         # xcoordinates range to consider as full range of motion ( <90 to >160 degrees)
-        per = np.interp(elbow, (90, 160), (0, 100))
+        per = np.interp(elbow, (90, 157), (0, 100))
         
         #Bar to show Pushup progress
-        bar = np.interp(elbow, (90, 160), (380, 50))
+        bar = np.interp(elbow, (90, 157), (380, 50))
 
         #Check to ensure right form before starting the program
-        if elbow > 160 and shoulder > 40 and (hip > 160 and hip < 190) and knee > 160:
+        if elbow > 160 and shoulder > 40 and (hip > 170 and hip < 190) and knee > 170:
             form = 1
         
         #Check for full range of motion for the pushup
         if form == 1:
             if per == 0: # reaching bottom position of push up
                 
-                if elbow <= 90 and (hip > 160 and hip < 190) and knee > 160:
+                if elbow <= 90 and (hip > 170 and hip < 190) and knee > 165:
                     count_status = ''
                     feedback = "GO UP"
                     if direction == 0:
@@ -113,10 +113,10 @@ while True:
                     feedback = "LOWER BODY"
                     count_status = 'NO COUNT'
 
-                elif hip <= 160 or hip >= 190:
+                elif hip <= 170 or hip >= 190:
                     feedback = "STRAIGHTEN BACK"
                     count_status = 'NO COUNT'
-                elif knee <= 160:
+                elif knee <= 170:
                     feedback = "STRAIGHTEN KNEE"
                     count_status = 'NO COUNT'
                 else:
@@ -124,7 +124,7 @@ while True:
                     count_status = 'NO COUNT'
                     
             if per == 100: # reaching top position of push up
-                if elbow > 160 and shoulder > 40 and (hip > 160 and hip < 190) and knee > 160:
+                if elbow > 160 and shoulder > 40 and (hip > 170 and hip < 190) and knee > 170:
                     count_status = ''
                     feedback = "GO DOWN"
                     if direction == 1:
@@ -139,10 +139,10 @@ while True:
                 elif elbow <= 160:
                     feedback = "STRAIGHTEN ELBOWS"
                     count_status = 'NO COUNT'
-                elif hip <= 160 or hip >= 190:
+                elif hip <= 170 or hip >= 190:
                     feedback = "STRAIGHTEN BACK"
                     count_status = 'NO COUNT'
-                elif knee <= 160:
+                elif knee <= 170:
                     feedback = "STRAIGHTEN KNEE"
                     count_status = 'NO COUNT'
                 #else:
