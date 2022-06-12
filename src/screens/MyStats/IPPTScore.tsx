@@ -45,11 +45,11 @@ export default function IPPTScore() {
       <View style={styles.container}>
         <Card style={styles.card}>
           <Card.Title
-            title="Most Recent IPPT Score"
+            title="Current IPPT Score"
           />
           <Card.Content>
             <View style={{width: "100%", alignItems: "center"}}>
-              <Text style={styles.subtitleText}>{score}</Text>
+              <Text style={styles.ipptText}>{score}</Text>
             </View>
           </Card.Content>
         </Card>
@@ -64,7 +64,8 @@ const styles = StyleSheet.create({
   card: {
     width: "80%",
     marginTop: 20,
-    marginBottom: 30
+    marginBottom: 40,
+    paddingBottom: 5
   },
   container: {
     flex: 1,
@@ -76,7 +77,10 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: "bold",
   },
-  subtitleText: {
-    fontSize: 50
+  ipptText: {
+    fontSize: 50,
+    fontWeight: "bold",
+    fontFamily: "Arial",
+    color: "red"
   }
 });
