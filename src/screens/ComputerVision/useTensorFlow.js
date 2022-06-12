@@ -1,5 +1,6 @@
-import * as tf from "@tensorflow/tfjs";
 import React from "react";
+
+import * as tf from "@tensorflow/tfjs";
 
 export function useTensorFlowModel(modelKind) {
   const [model, setModel] = React.useState(null);
@@ -12,12 +13,14 @@ export function useTensorFlowModel(modelKind) {
   }, []);
 
   React.useEffect(() => {
-    setModel(null);
-    modelKind.load().then((model) => {
-      if (isMounted.current) {
-        setModel(model);
-      }
-    });
+    tf.setBackend('rn-webgl').then(() => {
+      modelKind.load().then((model) => {
+        console.error(model);
+        if (isMounted.current) {
+          setModel(model);
+        }
+      })
+    }).catch(err => console.log(err.message));
   }, [modelKind]);
 
   return model;

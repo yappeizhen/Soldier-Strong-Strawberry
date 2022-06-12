@@ -3,7 +3,6 @@ import React from 'react';
 import { StyleSheet, View, useWindowDimensions } from 'react-native';
 
 import * as mobilenet from '@tensorflow-models/mobilenet';
-import * as tf from "@tensorflow/tfjs";
 
 import { CustomTensorCamera } from './CustomTensorCamera';
 import { LoadingView } from './LoadingView';
