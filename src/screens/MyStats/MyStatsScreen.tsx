@@ -90,7 +90,15 @@ export default function MyStatsScreen({ navigation }: any) {
         ) : (
           <></>
         )}
+        {/* Link to IPPT website */}
+        <Card>
+          <Card.Title title = "Link to NS Portal" />
+          <Card.Content>
+            For more information, visit www.ns.sg
+          </Card.Content>
+        </Card>
       </View>
+
     </ScrollView>
   );
 }
@@ -102,7 +110,7 @@ const styles = StyleSheet.create({
   card: {
     width: "80%",
     marginTop: 20,
-    padding: 16,
+    padding: 20,
   },
   container: {
     flex: 1,
@@ -114,4 +122,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: "bold",
   },
+  subtitleText: {
+    fontFamily: "Arial"
+  }
 });
