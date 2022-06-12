@@ -199,7 +199,7 @@ const styles = StyleSheet.create({
   card: {
     width: "80%",
     marginTop: 20,
-    marginBottom: 30
+    marginBottom: -80
   },
   container: {
     flex: 1,
