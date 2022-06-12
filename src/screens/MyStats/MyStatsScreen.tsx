@@ -20,12 +20,12 @@ export default function MyStatsScreen({ navigation }: any) {
       if (user) {
         const userProfileRef = doc(firebaseFirestore, "userProfiles", user.uid);
         onSnapshot(userProfileRef, (snapshot) => {
-          if (snapshot.exists()) {
+          if (snapshot.exists() && snapshot.data().birthday) {
             let thisCycle: Date = snapshot.data().birthday?.toDate();
             const currentYear = new Date().getFullYear();
-            thisCycle.setFullYear(currentYear);
+            thisCycle?.setFullYear(currentYear);
             let nextCycle: Date = snapshot.data().birthday?.toDate();
-            nextCycle.setFullYear(currentYear + 1);
+            nextCycle?.setFullYear(currentYear + 1);
             if (thisCycle <= new Date()) {
               thisCycle = nextCycle;
               thisCycle.setMinutes(0);

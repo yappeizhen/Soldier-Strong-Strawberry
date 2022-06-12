@@ -106,7 +106,7 @@ export default function IpptCalculatorScreen() {
               }
             ).at(0);
             
-            situpRecent = situpRecent.number == undefined ? 0 : situpRecent.number;
+            situpRecent = situpRecent?.number == undefined ? 0 : situpRecent.number;
             
             let runtime = snapshot
             .data()
@@ -120,11 +120,11 @@ export default function IpptCalculatorScreen() {
               }
             ).at(0);
             
-            runtime = runtime.timing == undefined ? 1100 : runtime.timing;
+            runtime = runtime?.timing == undefined ? 1100 : runtime.timing;
 
             let birthday: Date = snapshot.data().birthday?.toDate();
             const currDate : Date = new Date(); 
-            let yearsDiff = birthday.getFullYear() - currDate.getFullYear();
+            let yearsDiff = currDate.getFullYear() - birthday.getFullYear();
             if (currDate.getMonth() < birthday.getMonth()) {
             //get months when current month is greater  
               yearsDiff--;
@@ -167,7 +167,6 @@ export default function IpptCalculatorScreen() {
     } else {
       return table[age.toString()][parseInt(stationVal).toString()];
     }
-    
   }
 
   const overallScore = () => {
@@ -188,7 +187,6 @@ export default function IpptCalculatorScreen() {
     let pushupArrayTemp2 = pushupArray;
     let situpArrayTemp2 = situpArray;
     let runtimeArrayTemp2 = runtimeArray;
-    console.log(pushupArrayTemp2)
     pushupArrayTemp2.push({date: new Date(), number: parseInt(pushups)});
     situpArrayTemp2.push({date: new Date(), number: parseInt(situps)});
     runtimeArrayTemp2.push({date: new Date(), distance: 2400, timing: parseInt(runtime)});
