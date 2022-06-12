@@ -1,7 +1,7 @@
 import React from "react";
 import { ActivityIndicator, StyleSheet, Text, View } from "react-native";
 
-export function LoadingView({ children, message = '' }) {
+export function LoadingView({ children, message = "" }) {
   return (
     <View style={styles.container}>
       <View style={{ flexDirection: "row" }}>

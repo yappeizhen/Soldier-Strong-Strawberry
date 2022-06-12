@@ -1,19 +1,18 @@
 import { Camera } from 'expo-camera';
-import React from 'react';
+import React, { useState } from 'react';
 import { StyleSheet, View, useWindowDimensions } from 'react-native';
 
-import * as mobilenet from '@tensorflow-models/mobilenet';
+import * as posenet from '@tensorflow-models/posenet';
 import * as tf from "@tensorflow/tfjs";
 
 import { CustomTensorCamera } from './CustomTensorCamera';
 import { LoadingView } from './LoadingView';
-import { PredictionList } from './PredictionList';
+import { PushupCounter } from './PushupCounter';
 import { useTensorFlowModel } from './useTensorFlow';
 
 export function ModelView() {
-  const model = useTensorFlowModel(mobilenet);
-  const [predictions, setPredictions] = React.useState([]);
-
+  const [predictions, setPredictions] = useState();
+  const model = useTensorFlowModel(posenet);
   if (!model) {
     return <LoadingView message="Loading TensorFlow model" />;
   }
@@ -22,7 +21,7 @@ export function ModelView() {
     <View
       style={{ flex: 1, backgroundColor: "black", justifyContent: "center" }}
     >
-      <PredictionList predictions={predictions} />
+      <PushupCounter predictions={predictions} />
       <View style={{ borderRadius: 20, overflow: "hidden" }}>
         <ModelCamera model={model} setPredictions={setPredictions} />
       </View>
@@ -44,7 +43,8 @@ function ModelCamera({ model, setPredictions }) {
     (images) => {
       const loop = async () => {
         const nextImageTensor = images.next().value;
-        const predictions = await model.classify(nextImageTensor);
+        const predictions = await model.estimateSinglePose(nextImageTensor, { flipHorizontal: true });
+        // console.log(predictions);
         setPredictions(predictions);
         raf.current = requestAnimationFrame(loop);
         tf.dispose(nextImageTensor);

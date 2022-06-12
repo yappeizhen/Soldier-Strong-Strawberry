@@ -30,14 +30,17 @@ export function CustomTensorCamera({ style, width, ...props }) {
   }, [width]);
 
   return (
-    <TensorCamera
-      {...props}
-      style={[style, sizeStyle]}
-      cameraTextureWidth={TEXTURE_SIZE.width}
-      cameraTextureHeight={TEXTURE_SIZE.height}
-      resizeWidth={TENSOR_SIZE.width}
-      resizeHeight={TENSOR_SIZE.height}
-      resizeDepth={3}
-    />
+    <>
+
+      <TensorCamera
+        {...props}
+        style={[style, sizeStyle]}
+        cameraTextureWidth={TEXTURE_SIZE.width}
+        cameraTextureHeight={TEXTURE_SIZE.height}
+        resizeWidth={TENSOR_SIZE.width}
+        resizeHeight={TENSOR_SIZE.height}
+        resizeDepth={3}
+      />
+    </>
   );
 }
