@@ -28,9 +28,26 @@ threshold = 0.5
 #best = video.getbest(preftype="mp4")
 #cap = cv2.VideoCapture(best.url)
 #cap = cv2.VideoCapture('./gif/combined.mp4')
+import pafy
+import cv2
 
+url = "https://www.youtube.com/watch?v=eIP20t1ltmY&ab_channel=TrueFitness"
+#url = "https://youtu.be/eIP20t1ltmY?t=18"
+video = pafy.new(url)
+#best = video.getbest(preftype="mp4")
+best = video.getbest()
+cap = cv2.VideoCapture(best.url)
+#Asking the user for video start time and duration in seconds
+milliseconds = 1000
+start_time = 16 #int(input("Enter Start time: "))
+end_time = 49 #int(input("Enter Length: "))
+end_time = start_time + end_time
+# Passing the start and end time for CV2
+cap.set(cv2.CAP_PROP_POS_MSEC, start_time*milliseconds)
+fourcc = cv2.VideoWriter_fourcc('X','V','I','D')
+videoWriter = cv2.VideoWriter('pushup_demo.avi', fourcc, 30.0, (1280, 720))
 
-cap = cv2.VideoCapture(0)
+#cap = cv2.VideoCapture(0)
 detector = pm.poseDetector()
 count = 0
 direction = 0
@@ -38,10 +55,12 @@ form = 0
 feedback = "Fix Form"
 count_status = ''
 # Set mediapipe model 
-while True:
-    
-    sct_img = sct.grab(bounding_box)
-    img = np.array(sct_img)
+while cap and cap.get(cv2.CAP_PROP_POS_MSEC)<=end_time*milliseconds:
+    grabbed, img = cap.read()
+
+#while cap:
+    #sct_img = sct.grab(bounding_box)
+    #img = np.array(sct_img)
 
     # Make detections
     #image, results = mediapipe_detection(image, pose)
@@ -76,12 +95,19 @@ while True:
             shoulder = detector.findAngle(img, 13, 11, 23)
             hip = detector.findAngle(img, 11, 23,25)
             knee = detector.findAngle(img,23,25,27)
+            elbow_points = lmList[13]
+            hip_points = lmList[23]
+            knee_points = lmList[25]
+
         # Predict on right side of body (more visible)
         else:
             elbow = detector.findAngle(img, 12, 14, 16)
             shoulder = detector.findAngle(img, 14, 12, 24)
             hip = detector.findAngle(img, 12, 24,26)
             knee = detector.findAngle(img,24,26,28)
+            elbow_points = lmList[14]
+            hip_points = lmList[24]
+            knee_points = lmList[26]
         
         
         #Percentage of success of pushup
@@ -116,12 +142,17 @@ while True:
                 elif hip <= 170 or hip >= 190:
                     feedback = "STRAIGHTEN BACK"
                     count_status = 'NO COUNT'
+                    cv2.circle(img, (hip_points[2], hip_points[3]), 5, (0,0,255), cv2.FILLED)
+                    cv2.circle(img, (hip_points[2], hip_points[3]), 15, (0,0,255), 2)
+
                 elif knee <= 170:
                     feedback = "STRAIGHTEN KNEE"
                     count_status = 'NO COUNT'
-                else:
-                    feedback = "Fix Form"
-                    count_status = 'NO COUNT'
+                    cv2.circle(img, (knee_points[2], knee_points[3]), 5, (0,0,255), cv2.FILLED)
+                    cv2.circle(img, (knee_points[2], knee_points[3]), 15, (0,0,255), 2)
+                #else:
+                    #feedback = "Fix Form"
+                    #count_status = 'NO COUNT'
                     
             if per == 100: # reaching top position of push up
                 if elbow > 160 and shoulder > 40 and (hip > 170 and hip < 190) and knee > 170:
@@ -139,12 +170,19 @@ while True:
                 elif elbow <= 160:
                     feedback = "STRAIGHTEN ELBOWS"
                     count_status = 'NO COUNT'
+                    cv2.circle(img, (elbow_points[2], elbow_points[3]), 5, (0,0,255), cv2.FILLED)
+                    cv2.circle(img, (elbow_points[2], elbow_points[3]), 15, (0,0,255), 2)
                 elif hip <= 170 or hip >= 190:
                     feedback = "STRAIGHTEN BACK"
                     count_status = 'NO COUNT'
+                    cv2.circle(img, (hip_points[2], hip_points[3]), 5, (0,0,255), cv2.FILLED)
+                    cv2.circle(img, (hip_points[2], hip_points[3]), 15, (0,0,255), 2)
                 elif knee <= 170:
                     feedback = "STRAIGHTEN KNEE"
                     count_status = 'NO COUNT'
+                    cv2.circle(img, (knee_points[2], knee_points[3]), 5, (0,0,255), cv2.FILLED)
+                    cv2.circle(img, (knee_points[2], knee_points[3]), 15, (0,0,255), 2)
+
                 #else:
                     #feedback = "Fix Form"
                     #count_status = 'NO COUNT'
@@ -165,20 +203,21 @@ while True:
                 (0, 0, 255), 5)
     
     #Feedback 
-    cv2.rectangle(img, (width//2-140, 0), (width//2 + 140, 40), (255, 200, 255), cv2.FILLED)
+    cv2.rectangle(img, (width//2-140, 0), (width//2 + 180, 40), (255, 255, 255), cv2.FILLED)
     cv2.putText(img, feedback, (width//2 - 140, 35), cv2.FONT_HERSHEY_PLAIN, 2,
-                (255, 0, 0), 2)
+                (0, 0, 255), 2)
     
     #Count Status
-    cv2.rectangle(img, (width//2-140, 40), (width//2 + 140, 80), (255, 200, 255), cv2.FILLED)
+    cv2.rectangle(img, (width//2-140, 40), (width//2 + 180, 80), (255, 255, 255), cv2.FILLED)
     cv2.putText(img, count_status, (width//2 - 140, 75), cv2.FONT_HERSHEY_PLAIN, 2,
-                (255, 0, 0), 2)
+                (0, 0, 255), 2)
 
     cv2.imshow('screen capture', img)
-
+    videoWriter.write(img)
     if (cv2.waitKey(1) & 0xFF) == ord('q'):
         cv2.destroyAllWindows()
         break
     
-            
+cap.release() #release webcam
+videoWriter.release()            
 cv2.destroyAllWindows()
