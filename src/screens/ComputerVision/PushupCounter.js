@@ -7,13 +7,10 @@ import Svg, {
 
 import { LoadingView } from "./LoadingView";
 
-export function PushupCounter({ predictions }) {
+export function PushupCounter({ predictions, setPushupCount, setFeedback, setCountStatus }) {
   const [isGoingUp, setIsGoingUp] = useState(false);
-  const [pushupCount, setPushupCount] = useState(0);
-  let isReady = false;
 
-  const [feedback, setFeedback] = useState("");
-  const [countStatus, setCountStatus] = useState("");
+  let isReady = false;
 
   let angles = { elbow: 0, shoulder: 0, hip: 0, knee: 0 }
 
@@ -86,7 +83,7 @@ export function PushupCounter({ predictions }) {
       && angles.hip > 140 && angles.hip < 190
       && angles.knee > 140) {
       isReady = true;
-     // console.log("IM READYYYYYYYYY")
+      //console.log("IM READYYYYYYYYY")
     }
   }
   const getPushUpStatus = () => {
@@ -121,9 +118,9 @@ export function PushupCounter({ predictions }) {
           setCountStatus("");
           setFeedback("Go Down");
           if (isGoingUp) {
-            setPushupCount(pushupCount + 1);
+            setPushupCount();
             setIsGoingUp(false);
-            setCountStatus("");
+            setCountStatus("Success!");
           } else {
             setCountStatus("No Count")
           }
@@ -148,32 +145,6 @@ export function PushupCounter({ predictions }) {
 
   return (
     <>
-      <View style={styles.keypointcontainer}>
-        <Svg height="50" width="50">
-          <Circle
-            cx="50"
-            cy="50"
-            r="45"
-            stroke="blue"
-            strokeWidth="2.5"
-            fill="green"
-          />
-          <Rect
-            x="15"
-            y="15"
-            width="70"
-            height="70"
-            stroke="red"
-            strokeWidth="2"
-            fill="yellow"
-          />
-        </Svg>
-      </View>
-      <View style={styles.container}>
-        <Text style={styles.text}>{countStatus}</Text>
-        <Text style={styles.text}>{feedback}</Text>
-        <Text style={styles.text}>{pushupCount}</Text>
-      </View>
     </>
   );
 }
