@@ -48,14 +48,17 @@ function ModelCamera({ model, setPredictions, modelRef }) {
   const onReady = React.useCallback(
     (images) => {
       const loop = async () => {
-        const nextImageTensor = images.next().value;
-        const predictions = await model.estimateSinglePose(nextImageTensor, { flipHorizontal: true });
-        // console.log(predictions);
-        setPredictions(predictions);
-        raf.current = requestAnimationFrame(loop);
-        tf.dispose(nextImageTensor);
-        tf.dispose(images);
-        tf.dispose(predictions);
+        try {
+          const nextImageTensor = images.next().value;
+          const predictions = await model.estimateSinglePose(nextImageTensor, { flipHorizontal: true });
+          setPredictions(predictions);
+          raf.current = requestAnimationFrame(loop);
+          tf.dispose(nextImageTensor);
+          tf.dispose(images);
+          tf.dispose(predictions);
+        } catch (err) {
+          console.log(err.message);
+        }
       };
       loop();
     },
