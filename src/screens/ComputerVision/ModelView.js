@@ -19,6 +19,7 @@ export function ModelView() {
   const [pushupCount, setPushupCount] = useState(0);
   const [feedback, setFeedback] = useState("");
   const [countStatus, setCountStatus] = useState("");
+  const [isGoingUp, setIsGoingUp] = useState(false);
 
   const modelRef = React.useRef(null);
   const model = useTensorFlowModel(posenet);
@@ -36,6 +37,8 @@ export function ModelView() {
         setCountStatus={setCountStatus}
         setPushupCount={() => { setPushupCount(pushupCount + 1) }}
         setFeedback={setFeedback}
+        isGoingUp={isGoingUp}
+        setIsGoingUp={setIsGoingUp}
       />
       <View style={styles.keypointcontainer}>
         <Svg height="50" width="50">

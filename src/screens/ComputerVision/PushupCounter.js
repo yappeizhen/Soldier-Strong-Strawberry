@@ -3,8 +3,7 @@ import { StyleSheet } from "react-native";
 
 import { LoadingView } from "./LoadingView";
 
-export function PushupCounter({ predictions, setPushupCount, setFeedback, setCountStatus }) {
-  const [isGoingUp, setIsGoingUp] = useState(false);
+export function PushupCounter({ predictions, setPushupCount, setFeedback, setCountStatus, isGoingUp, setIsGoingUp }) {
 
   let isReady = false;
 
