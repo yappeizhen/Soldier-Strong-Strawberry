@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { StyleSheet } from "react-native";
 
 import { LoadingView } from "./LoadingView";
@@ -6,7 +6,7 @@ import { LoadingView } from "./LoadingView";
 export function PushupCounter({ predictions, setPushupCount, setFeedback, setCountStatus, isGoingUp, setIsGoingUp }) {
 
   let isReady = false;
-
+  let currentIsGoingUp = isGoingUp;
   let angles = { elbow: 0, shoulder: 0, hip: 0, knee: 0 }
 
   if (!predictions) {
@@ -88,8 +88,9 @@ export function PushupCounter({ predictions, setPushupCount, setFeedback, setCou
           && angles.hip > 120 && angles.hip < 190
           && angles.knee > 120) {
           setFeedback("Go Up");
-          if (!isGoingUp) {
-            setIsGoingUp(true);
+          if (!currentIsGoingUp) {
+            currentIsGoingUp = true;
+            setIsGoingUp();
             setCountStatus("");
           } else {
             setCountStatus("No Count");
@@ -112,9 +113,10 @@ export function PushupCounter({ predictions, setPushupCount, setFeedback, setCou
         if (angles.elbow > 120 && angles.shoulder > 40 && angles.hip > 120 && angles.hip < 190 && angles.knee > 120) {
           setCountStatus("");
           setFeedback("Go Down");
-          if (isGoingUp) {
+          if (!currentIsGoingUp) {
             setPushupCount();
-            setIsGoingUp(false);
+            currentIsGoingUp = false;
+            setIsGoingUp();
             setCountStatus("Success!");
           }
         } else if (angles.elbow <= 120) {
@@ -134,7 +136,7 @@ export function PushupCounter({ predictions, setPushupCount, setFeedback, setCou
     isCorrectForm();
   }
   getPushUpStatus();
-  //console.log(angles);
+  // console.log(isGoingUp);
 
   return (
     <>
