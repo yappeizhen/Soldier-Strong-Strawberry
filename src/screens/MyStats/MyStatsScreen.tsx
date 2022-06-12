@@ -10,6 +10,7 @@ import { ScrollView, View } from "../../components/Themed";
 import { firebaseFirestore } from "../../firebase/firebase";
 import { useAuthState } from "../../hooks/useAuthState";
 import TrainingPlan from "./TrainingPlan";
+import IPPTScore from "./IPPTScore"
 
 export default function MyStatsScreen({ navigation }: any) {
   const [targetIPPTDate, setTargetIPPTDate] = useState<Date | undefined>();
@@ -50,6 +51,7 @@ export default function MyStatsScreen({ navigation }: any) {
   return (
     <ScrollView>
       <TrainingPlan />
+      <IPPTScore />
       <View style={styles.container}>
         {endOfCycleDate ? (
           <Card style={styles.card}>
