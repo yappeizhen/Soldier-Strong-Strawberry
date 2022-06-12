@@ -6,7 +6,6 @@ import { atan2 } from "@tensorflow/tfjs";
 import { LoadingView } from "./LoadingView";
 
 export function PushupCounter({ predictions }) {
-  const [isFormCorrect, setIsFormCorrect] = useState(false);
   const [isGoingUp, setIsGoingUp] = useState(false);
   const [pushupCount, setPushupCount] = useState(0);
 
@@ -80,13 +79,12 @@ export function PushupCounter({ predictions }) {
       && angles.shoulder > 40
       && angles.hip > 160 && angles.hip < 190
       && angles.knee > 160) {
-      setIsFormCorrect(true);
       return true;
     }
     return false;
   }
   const getPushUpStatus = () => {
-    if (isCorrectForm) {
+    if (isCorrectForm()) {
       const elbowPercentage = (angles.elbow / 160) * 100;
       if (elbowPercentage === 0) {
         if (angles.elbow <= 90
