@@ -12,7 +12,9 @@ import { useTensorFlowModel } from './useTensorFlow';
 
 export function ModelView() {
   const [predictions, setPredictions] = useState();
+  const modelRef = React.useRef(null);
   const model = useTensorFlowModel(posenet);
+  modelRef.current = model;
   if (!model) {
     return <LoadingView message="Loading TensorFlow model" />;
   }
@@ -23,19 +25,23 @@ export function ModelView() {
     >
       <PushupCounter predictions={predictions} />
       <View style={{ borderRadius: 20, overflow: "hidden" }}>
-        <ModelCamera model={model} setPredictions={setPredictions} />
+        <ModelCamera model={model} setPredictions={setPredictions} modelRef={modelRef} />
       </View>
     </View>
   );
 }
 
-function ModelCamera({ model, setPredictions }) {
+function ModelCamera({ model, setPredictions, modelRef }) {
   const raf = React.useRef(null);
   const size = useWindowDimensions();
 
   React.useEffect(() => {
     return () => {
       cancelAnimationFrame(raf.current);
+      if (modelRef.current) {
+        console.log("Cleaning");
+        modelRef.current.dispose();
+      }
     };
   }, []);
 
@@ -48,6 +54,7 @@ function ModelCamera({ model, setPredictions }) {
         setPredictions(predictions);
         raf.current = requestAnimationFrame(loop);
         tf.dispose(nextImageTensor);
+        tf.dispose(images);
         tf.dispose(predictions);
       };
       loop();
