@@ -34,7 +34,7 @@ export default function IpptCalculatorScreen() {
   const [currentUser, setCurrentUser] = useState<any>();
   const [pushupArray, setPushupArray] = useState<StaticStat[]>([]);
   const [situpArray, setSitupArray] = useState<StaticStat[]>([]);
-  const [runtimeArray, setRuntimeArray] = useState<StaticStat[]>([]);
+  const [runtimeArray, setRuntimeArray] = useState<RunningStat[]>([]);
 
   const pushupTable = require('../constants/ippt/pushup.json');
   const situpTable = require('../constants/ippt/situp.json');
