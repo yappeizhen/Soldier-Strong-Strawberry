@@ -1,9 +1,5 @@
 import React, { useState } from "react";
-import { StyleSheet, Text, View } from "react-native";
-import Svg, {
-  Circle,
-  Rect,
-} from 'react-native-svg';
+import { StyleSheet } from "react-native";
 
 import { LoadingView } from "./LoadingView";
 
@@ -121,8 +117,6 @@ export function PushupCounter({ predictions, setPushupCount, setFeedback, setCou
             setPushupCount();
             setIsGoingUp(false);
             setCountStatus("Success!");
-          } else {
-            setCountStatus("No Count")
           }
         } else if (angles.elbow <= 120) {
           setFeedback("Straighten Elbows");
