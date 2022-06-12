@@ -3,6 +3,7 @@ import React from "react";
 import * as tf from "@tensorflow/tfjs";
 
 export function useTensorFlowModel(modelKind) {
+  console
   const [model, setModel] = React.useState(null);
 
   const isMounted = React.useRef(true);
@@ -15,7 +16,6 @@ export function useTensorFlowModel(modelKind) {
   React.useEffect(() => {
     tf.setBackend('rn-webgl').then(() => {
       modelKind.load().then((model) => {
-        console.error(model);
         if (isMounted.current) {
           setModel(model);
         }
