@@ -40,7 +40,7 @@ count_status = ''
 # Set mediapipe model 
 while True:
     
-    sct_img = sct.grab(bounding_box)
+    sct_img = sct.grab(bounding_box) # Grabs image
     img = np.array(sct_img)
 
     # Make detections
@@ -72,10 +72,10 @@ while True:
 
         # Predict on left side of body (more visible)
         if left_visibility_sum > right_visibility_sum:
-            elbow = detector.findAngle(img, 11, 13, 15)
-            shoulder = detector.findAngle(img, 13, 11, 23)
-            hip = detector.findAngle(img, 11, 23,25)
-            knee = detector.findAngle(img,23,25,27)
+            elbow = detector.findAngle(img, 11, 13, 15) # elbow, shoulder, wrist
+            shoulder = detector.findAngle(img, 13, 11, 23) # shoulder, elbow, hip
+            hip = detector.findAngle(img, 11, 23,25) # hip, shoulder, knee
+            knee = detector.findAngle(img,23,25,27) # knee, hip, ankle
         # Predict on right side of body (more visible)
         else:
             elbow = detector.findAngle(img, 12, 14, 16)
