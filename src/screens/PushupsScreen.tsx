@@ -3,27 +3,34 @@ import { useEffect } from "react";
 import { useState } from "react";
 import { StyleSheet, TouchableOpacity } from "react-native";
 
+import CustomButton from "../components/CustomButton";
 import { Text, View } from "../components/Themed";
+import { LoadingView } from "./ComputerVision/LoadingView";
+import { ModelView } from "./ComputerVision/ModelView";
+import { useTensorFlowLoaded } from "./ComputerVision/useTensorFlow";
 
 export default function PushupsScreen() {
-  const [hasPermission, setHasPermission] = useState<boolean>();
-  const [type, setType] = useState(CameraType.back);
-  useEffect(() => {
-    (async () => {
-      const { status } = await Camera.requestCameraPermissionsAsync();
-      setHasPermission(status === "granted");
-    })();
-  }, []);
-
-  if (hasPermission === null) {
-    return <View />;
-  }
-  if (hasPermission === false) {
-    return <Text>No access to camera</Text>;
+  const [permission, requestPermission] = Camera.useCameraPermissions();
+  // const [type, setType] = useState(CameraType.back);
+  // useEffect(() => {
+  //   (async () => {
+  //     const { status } = await Camera.requestCameraPermissionsAsync();
+  //     setHasPermission(status === "granted");
+  //   })();
+  // }, []);
+  if (!permission?.granted) {
+    return (
+      <LoadingView message="Camera permission is required to continue">
+        <CustomButton onPress={requestPermission}>
+          Grant Permission
+        </CustomButton>
+      </LoadingView>
+    );
   }
   return (
     <View style={styles.container}>
-      <Camera style={styles.camera} type={type}>
+      <ModelView />
+      {/* <Camera style={styles.camera} type={type}>
         <View style={styles.buttonContainer}>
           <TouchableOpacity
             style={styles.button}
@@ -36,7 +43,7 @@ export default function PushupsScreen() {
             <Text style={styles.text}> Flip </Text>
           </TouchableOpacity>
         </View>
-      </Camera>
+      </Camera> */}
     </View>
   );
 }
