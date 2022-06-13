@@ -80,7 +80,6 @@ const styles = StyleSheet.create({
   ipptText: {
     fontSize: 50,
     fontWeight: "bold",
-    fontFamily: "Arial",
     color: Colors['light'].tint
   }
 });
