@@ -1,17 +1,17 @@
 import { doc, onSnapshot, updateDoc } from "firebase/firestore";
 import moment from "moment";
-import { useState, useEffect } from "react";
-import { StyleSheet, Linking } from "react-native";
+import { useEffect, useState } from "react";
+import { Linking, StyleSheet } from "react-native";
 import CountDown from "react-native-countdown-component";
 import { Card } from "react-native-paper";
-import { Text } from "../../components/Themed";
 
+import CustomButton from "../../components/CustomButton";
+import { Text } from "../../components/Themed";
 import { ScrollView, View } from "../../components/Themed";
 import { firebaseFirestore } from "../../firebase/firebase";
 import { useAuthState } from "../../hooks/useAuthState";
-import TrainingPlan from "./TrainingPlan";
 import IPPTScore from "./IPPTScore"
-import CustomButton from "../../components/CustomButton";
+import TrainingPlan from "./TrainingPlan";
 
 export default function MyStatsScreen({ navigation }: any) {
   const [targetIPPTDate, setTargetIPPTDate] = useState<Date | undefined>();
@@ -127,6 +127,5 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
   subtitleText: {
-    fontFamily: "Arial"
   }
 });
