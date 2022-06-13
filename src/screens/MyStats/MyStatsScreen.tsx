@@ -93,13 +93,19 @@ export default function MyStatsScreen({ navigation }: any) {
         )}
         {/* Link to IPPT website */}
         <Card style={styles.card}>
-          <Card.Title title = "Link to NS Portal" />
-            <Card.Content>
-              <Text style={{marginBottom: 10}}>For more information, visit the NS Portal below: </Text>
-              <CustomButton 
-              onPress={() => {Linking.openURL('https://www.ns.sg/nsp/portal/site/login')}}
-              >NS Portal</CustomButton>
-            </Card.Content>
+          <Card.Title title="Link to NS Portal" />
+          <Card.Content>
+            <Text style={{ marginBottom: 10 }}>
+              For more information, visit the NS Portal below:{" "}
+            </Text>
+            <CustomButton
+              onPress={() => {
+                Linking.openURL("https://www.ns.sg/nsp/portal/site/login");
+              }}
+            >
+              NS Portal
+            </CustomButton>
+          </Card.Content>
         </Card>
       </View>
     </ScrollView>
@@ -125,6 +131,4 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: "bold",
   },
-  subtitleText: {
-  }
 });
