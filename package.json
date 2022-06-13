@@ -59,7 +59,9 @@
     "react-native-vector-icons": "^9.1.0",
     "react-native-web": "0.17.7",
     "uninstall": "^0.0.0",
-    "expo-camera": "~12.2.0"
+    "expo-camera": "~12.2.0",
+    "webpack-dev-server": "~3.11.0",
+    "@expo/webpack-config": "~0.16.2"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",

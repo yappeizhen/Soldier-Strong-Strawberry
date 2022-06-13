@@ -17,6 +17,10 @@ export type TrainingItem = {
     item: string,
     isComplete: boolean
 }
+export type ScoreIPPT = {
+    item: string;
+    isComplete: boolean;
+}
 export type RunningStat = {
     timing: number;
     distance: number;

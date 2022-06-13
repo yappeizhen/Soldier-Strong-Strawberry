@@ -5,11 +5,13 @@ import { useEffect } from "react";
 import { StyleSheet } from "react-native";
 import CountDown from "react-native-countdown-component";
 import { Card } from "react-native-paper";
+import { Text } from "../../components/Themed";
 
 import { ScrollView, View } from "../../components/Themed";
 import { firebaseFirestore } from "../../firebase/firebase";
 import { useAuthState } from "../../hooks/useAuthState";
 import TrainingPlan from "./TrainingPlan";
+import IPPTScore from "./IPPTScore"
 
 export default function MyStatsScreen({ navigation }: any) {
   const [targetIPPTDate, setTargetIPPTDate] = useState<Date | undefined>();
@@ -50,6 +52,7 @@ export default function MyStatsScreen({ navigation }: any) {
   return (
     <ScrollView>
       <TrainingPlan />
+      <IPPTScore />
       <View style={styles.container}>
         {endOfCycleDate ? (
           <Card style={styles.card}>
@@ -88,7 +91,15 @@ export default function MyStatsScreen({ navigation }: any) {
         ) : (
           <></>
         )}
+        {/* Link to IPPT website */}
+        <Card>
+          <Card.Title title = "Link to NS Portal" />
+            <Card.Content>
+              <Text>For more information, visit www.ns.sg</Text>
+            </Card.Content>
+        </Card>
       </View>
+
     </ScrollView>
   );
 }
@@ -100,7 +111,7 @@ const styles = StyleSheet.create({
   card: {
     width: "80%",
     marginTop: 20,
-    padding: 16,
+    padding: 20,
   },
   container: {
     flex: 1,
@@ -112,4 +123,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: "bold",
   },
+  subtitleText: {
+    fontFamily: "Arial"
+  }
 });
