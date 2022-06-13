@@ -63,8 +63,8 @@ const styles = StyleSheet.create({
   },
   card: {
     width: "80%",
-    marginTop: 20,
-    marginBottom: 40,
+    marginTop: 10,
+    marginBottom: 10,
     paddingBottom: 5
   },
   container: {
@@ -81,6 +81,6 @@ const styles = StyleSheet.create({
     fontSize: 50,
     fontWeight: "bold",
     fontFamily: "Arial",
-    color: "red"
+    color: Colors['light'].tint
   }
 });
