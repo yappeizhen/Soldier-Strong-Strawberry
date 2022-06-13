@@ -77,13 +77,13 @@
     "uninstall": "^0.0.0"
 =======
     "uninstall": "^0.0.0",
-<<<<<<< HEAD
-    "expo-camera": "~12.2.0"
-=======
     "webpack-dev-server": "~3.11.0",
     "@expo/webpack-config": "~0.16.2"
+<<<<<<< HEAD
 >>>>>>> 1c6e4e4 (first commit)
 >>>>>>> 7db07ee (first commit)
+=======
+>>>>>>> e0c1e5e (Commit all)
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",

@@ -5,6 +5,7 @@ import { useEffect } from "react";
 import { StyleSheet } from "react-native";
 import CountDown from "react-native-countdown-component";
 import { Card } from "react-native-paper";
+import { Text } from "../../components/Themed";
 
 import { ScrollView, View } from "../../components/Themed";
 import { firebaseFirestore } from "../../firebase/firebase";
@@ -22,10 +23,14 @@ export default function MyStatsScreen({ navigation }: any) {
         const userProfileRef = doc(firebaseFirestore, "userProfiles", user.uid);
         onSnapshot(userProfileRef, (snapshot) => {
           if (snapshot.exists()) {
-            let thisCycle: Date = snapshot.data().birthday?.toDate();
+            let thisCycle: Date = new Date()
+            let nextCycle: Date = new Date()
+            if (snapshot.data().birthday) {
+              thisCycle = snapshot.data().birthday.toDate();
+              nextCycle = snapshot.data().birthday.toDate();
+            }
             const currentYear = new Date().getFullYear();
             thisCycle.setFullYear(currentYear);
-            let nextCycle: Date = snapshot.data().birthday?.toDate();
             nextCycle.setFullYear(currentYear + 1);
             if (thisCycle <= new Date()) {
               thisCycle = nextCycle;
@@ -93,9 +98,9 @@ export default function MyStatsScreen({ navigation }: any) {
         {/* Link to IPPT website */}
         <Card>
           <Card.Title title = "Link to NS Portal" />
-          <Card.Content>
-            For more information, visit www.ns.sg
-          </Card.Content>
+            <Card.Content>
+              <Text>For more information, visit www.ns.sg</Text>
+            </Card.Content>
         </Card>
       </View>
 
