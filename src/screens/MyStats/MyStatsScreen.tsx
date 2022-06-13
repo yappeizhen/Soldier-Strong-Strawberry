@@ -1,8 +1,7 @@
 import { doc, onSnapshot, updateDoc } from "firebase/firestore";
 import moment from "moment";
-import { useState } from "react";
-import { useEffect } from "react";
-import { StyleSheet } from "react-native";
+import { useState, useEffect } from "react";
+import { StyleSheet, Linking } from "react-native";
 import CountDown from "react-native-countdown-component";
 import { Card } from "react-native-paper";
 import { Text } from "../../components/Themed";
@@ -12,6 +11,7 @@ import { firebaseFirestore } from "../../firebase/firebase";
 import { useAuthState } from "../../hooks/useAuthState";
 import TrainingPlan from "./TrainingPlan";
 import IPPTScore from "./IPPTScore"
+import CustomButton from "../../components/CustomButton";
 
 export default function MyStatsScreen({ navigation }: any) {
   const [targetIPPTDate, setTargetIPPTDate] = useState<Date | undefined>();
@@ -92,10 +92,13 @@ export default function MyStatsScreen({ navigation }: any) {
           <></>
         )}
         {/* Link to IPPT website */}
-        <Card>
+        <Card style={styles.card}>
           <Card.Title title = "Link to NS Portal" />
             <Card.Content>
-              <Text>For more information, visit www.ns.sg</Text>
+              <Text style={{marginBottom: 10}}>For more information, visit the NS Portal below: </Text>
+              <CustomButton 
+              onPress={() => {Linking.openURL('https://www.ns.sg/nsp/portal/site/login')}}
+              >NS Portal</CustomButton>
             </Card.Content>
         </Card>
       </View>

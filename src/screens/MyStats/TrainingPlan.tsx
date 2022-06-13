@@ -121,6 +121,7 @@ export default function TrainingPlan() {
       });
   };
   return (
+    
       <View style={styles.container}>
         <Card style={styles.card}>
           <Card.Title
@@ -199,12 +200,16 @@ const styles = StyleSheet.create({
   card: {
     width: "80%",
     marginTop: 20,
-    marginBottom: -80
+    marginBottom: 30,
+    // borderWidth: 5,
+    borderColor: "black"
   },
   container: {
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
+    // borderWidth: 5,
+    borderColor: "black"
   },
   title: {
     marginTop: 24,
