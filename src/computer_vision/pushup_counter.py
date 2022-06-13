@@ -36,16 +36,21 @@ url = "https://www.youtube.com/watch?v=eIP20t1ltmY&ab_channel=TrueFitness"
 video = pafy.new(url)
 #best = video.getbest(preftype="mp4")
 best = video.getbest()
-cap = cv2.VideoCapture(best.url)
+#cap = cv2.VideoCapture(best.url)
+cap = cv2.VideoCapture("video_2022-06-14_01-43-52.mp4")
 #Asking the user for video start time and duration in seconds
 milliseconds = 1000
-start_time = 16 #int(input("Enter Start time: "))
+start_time = 3 #int(input("Enter Start time: "))
 end_time = 49 #int(input("Enter Length: "))
 end_time = start_time + end_time
 # Passing the start and end time for CV2
 cap.set(cv2.CAP_PROP_POS_MSEC, start_time*milliseconds)
 fourcc = cv2.VideoWriter_fourcc('X','V','I','D')
-videoWriter = cv2.VideoWriter('pushup_demo.avi', fourcc, 30.0, (1280, 720))
+fourcc = cv2.VideoWriter_fourcc(*'MP4V')
+videoWriter = cv2.VideoWriter('mh_pushup_demo.mp4', fourcc, 30.0, (1280, 720))
+
+cap.set(3,1280)
+cap.set(4,720)
 
 #cap = cv2.VideoCapture(0)
 detector = pm.poseDetector()
@@ -57,7 +62,7 @@ count_status = ''
 # Set mediapipe model 
 while cap and cap.get(cv2.CAP_PROP_POS_MSEC)<=end_time*milliseconds:
     grabbed, img = cap.read()
-
+    img = cv2.resize(img, (1280, 720)) 
 #while cap:
     #sct_img = sct.grab(bounding_box)
     #img = np.array(sct_img)
@@ -118,14 +123,14 @@ while cap and cap.get(cv2.CAP_PROP_POS_MSEC)<=end_time*milliseconds:
         bar = np.interp(elbow, (90, 157), (380, 50))
 
         #Check to ensure right form before starting the program
-        if elbow > 160 and shoulder > 40 and (hip > 170 and hip < 190) and knee > 170:
+        if elbow > 160 and shoulder > 40 and (hip > 165 and hip < 190) and knee > 170:
             form = 1
         
         #Check for full range of motion for the pushup
         if form == 1:
             if per == 0: # reaching bottom position of push up
                 
-                if elbow <= 90 and (hip > 170 and hip < 190) and knee > 165:
+                if elbow <= 90 and (hip > 165 and hip < 190) and knee > 165:
                     count_status = ''
                     feedback = "GO UP"
                     if direction == 0:
@@ -139,7 +144,7 @@ while cap and cap.get(cv2.CAP_PROP_POS_MSEC)<=end_time*milliseconds:
                     feedback = "LOWER BODY"
                     count_status = 'NO COUNT'
 
-                elif hip <= 170 or hip >= 190:
+                elif hip <= 165 or hip >= 190:
                     feedback = "STRAIGHTEN BACK"
                     count_status = 'NO COUNT'
                     cv2.circle(img, (hip_points[2], hip_points[3]), 5, (0,0,255), cv2.FILLED)
@@ -155,7 +160,7 @@ while cap and cap.get(cv2.CAP_PROP_POS_MSEC)<=end_time*milliseconds:
                     #count_status = 'NO COUNT'
                     
             if per == 100: # reaching top position of push up
-                if elbow > 160 and shoulder > 40 and (hip > 170 and hip < 190) and knee > 170:
+                if elbow > 160 and shoulder > 40 and (hip > 165 and hip < 190) and knee > 170:
                     count_status = ''
                     feedback = "GO DOWN"
                     if direction == 1:
@@ -172,7 +177,7 @@ while cap and cap.get(cv2.CAP_PROP_POS_MSEC)<=end_time*milliseconds:
                     count_status = 'NO COUNT'
                     cv2.circle(img, (elbow_points[2], elbow_points[3]), 5, (0,0,255), cv2.FILLED)
                     cv2.circle(img, (elbow_points[2], elbow_points[3]), 15, (0,0,255), 2)
-                elif hip <= 170 or hip >= 190:
+                elif hip <= 165 or hip >= 190:
                     feedback = "STRAIGHTEN BACK"
                     count_status = 'NO COUNT'
                     cv2.circle(img, (hip_points[2], hip_points[3]), 5, (0,0,255), cv2.FILLED)
@@ -203,13 +208,13 @@ while cap and cap.get(cv2.CAP_PROP_POS_MSEC)<=end_time*milliseconds:
                 (0, 0, 255), 5)
     
     #Feedback 
-    cv2.rectangle(img, (width//2-140, 0), (width//2 + 180, 40), (255, 255, 255), cv2.FILLED)
-    cv2.putText(img, feedback, (width//2 - 140, 35), cv2.FONT_HERSHEY_PLAIN, 2,
+    cv2.rectangle(img, (width//2-200, 0), (width//2 + 200, 40), (255, 255, 255), cv2.FILLED)
+    cv2.putText(img, feedback, (width//2 - 200, 35), cv2.FONT_HERSHEY_PLAIN, 2,
                 (0, 0, 255), 2)
     
     #Count Status
-    cv2.rectangle(img, (width//2-140, 40), (width//2 + 180, 80), (255, 255, 255), cv2.FILLED)
-    cv2.putText(img, count_status, (width//2 - 140, 75), cv2.FONT_HERSHEY_PLAIN, 2,
+    cv2.rectangle(img, (width//2-200, 40), (width//2 + 200, 80), (255, 255, 255), cv2.FILLED)
+    cv2.putText(img, count_status, (width//2 - 200, 75), cv2.FONT_HERSHEY_PLAIN, 2,
                 (0, 0, 255), 2)
 
     cv2.imshow('screen capture', img)

@@ -19,7 +19,7 @@ sct = mss()
 sequence = []
 sentence = []
 predictions = []
-threshold = 0.5
+threshold = 0.9
 
 #import pafy
 #import cv2
@@ -28,9 +28,26 @@ threshold = 0.5
 #best = video.getbest(preftype="mp4")
 #cap = cv2.VideoCapture(best.url)
 #cap = cv2.VideoCapture('./gif/combined.mp4')
+import pafy
+import cv2
 
+url = "https://www.youtube.com/watch?v=JuBKu4D4FB4&ab_channel=Training%26Testing"
+url = "https://www.youtube.com/watch?v=Vp4tV0Wt2wI&ab_channel=CollegeEastPhysicalEducation%26Sports"
+video = pafy.new(url)
+#best = video.getbest(preftype="mp4")
+best = video.getbest()
+cap = cv2.VideoCapture(best.url)
+#Asking the user for video start time and duration in seconds
+milliseconds = 1000
+start_time = 10 #int(input("Enter Start time: "))
+end_time = 46 #int(input("Enter Length: "))
+end_time = start_time + end_time
+# Passing the start and end time for CV2
+cap.set(cv2.CAP_PROP_POS_MSEC, start_time*milliseconds)
+fourcc = cv2.VideoWriter_fourcc('X','V','I','D')
+videoWriter = cv2.VideoWriter('mh_situp_demo.avi', fourcc, 30.0, (1280, 720))
 
-cap = cv2.VideoCapture(0)
+#cap = cv2.VideoCapture(0)
 detector = pm.poseDetector()
 count = 0
 direction = 0
@@ -38,10 +55,13 @@ form = 0
 feedback = "Fix Form"
 count_status = ''
 # Set mediapipe model 
-while True:
+while cap and cap.get(cv2.CAP_PROP_POS_MSEC)<=end_time*milliseconds:
+    grabbed, img = cap.read()
+
     
-    sct_img = sct.grab(bounding_box)
-    img = np.array(sct_img)
+    
+    #sct_img = sct.grab(bounding_box)
+    #img = np.array(sct_img)
 
     # Make detections
     #image, results = mediapipe_detection(image, pose)
@@ -93,25 +113,26 @@ while True:
 
         # Draw Knee Radius Indicator
         
-        
-        cv2.circle(img, (knee_points[2], knee_points[3]), 40, (0,0,255), 2)
+        elbow_knee_threshold = 80
+        cv2.circle(img, (knee_points[2], knee_points[3]), elbow_knee_threshold, (0,0,255), 2)
 
         # Percentage of success of situp
         # xcoordinates range to consider as full range of motion ( <90 to >160 degrees)
-        per = np.interp(hip, (60,110), (0, 100))
+        per = np.interp(hip, (60,120), (0, 100))
         
         #Bar to show situp progress
-        bar = np.interp(hip, (60,110), (50, 380))
+        bar = np.interp(hip, (60,120), (50, 380))
 
         #Check to ensure right form before starting the program
-        if (110 < hip and hip < 160) and knee < 100 and (shoulder_hip_feet > 160):
+        if (110 < hip and hip < 160) and knee < 100 and (shoulder_hip_feet > 140):
             form = 1
+
         
         #Check for full range of motion for the situp
         if form == 1:
             if per == 100: # reaching bottom position of situp
                 #if True:
-                if (110 < hip and hip < 160) and knee < 100 and (shoulder_hip_feet > 160):
+                if (120 < hip and hip < 160) and knee < 100 and (shoulder_hip_feet > 160):
                     count_status = ''
                     feedback = "GO UP"
                     if direction == 0:
@@ -124,13 +145,13 @@ while True:
                     feedback = "BEND KNEES"
                     count_status = 'NO COUNT'
 
-                elif (110 > hip and hip > 160) and (shoulder_hip_feet > 160):
+                elif (110 > hip and hip > 160) and (shoulder_hip_feet > 150):
                     feedback = "TOUCH HEAD TO GROUND"
                     count_status = 'NO COUNT'
 
                     
             if per == 0: # reaching top position of sit up , elbow and knee should be touching each other
-                if (elbow< 70) and (20 <shoulder and shoulder< 70) and (hip < 60) and  knee < 100 and (abs(int(elbow_points[2]) - int(knee_points[2])) <= 40) and (abs(int(elbow_points[3]) - int(knee_points[3])) <= 40):
+                if (elbow< 70) and (shoulder< 120) and (hip < 60) and  knee < 100 and (abs(int(elbow_points[2]) - int(knee_points[2])) <= elbow_knee_threshold) and (abs(int(elbow_points[3]) - int(knee_points[3])) <= elbow_knee_threshold):
 
                     count_status = ''
                     feedback = "GO DOWN"
@@ -146,13 +167,13 @@ while True:
                     feedback = "BEND KNEES"
                     count_status = 'NO COUNT'
 
-                elif (hip > 60) or (abs(int(elbow_points[2]) - int(knee_points[2])) > 40) or (abs(int(elbow_points[3]) - int(knee_points[3])) > 40):
+                elif (hip > 60) or (abs(int(elbow_points[2]) - int(knee_points[2])) > elbow_knee_threshold) or (abs(int(elbow_points[3]) - int(knee_points[3])) > elbow_knee_threshold):
                     feedback = "TOUCH ELBOW AND KNEE"
                     count_status = 'NO COUNT'
-          
-                #else:
-                    #feedback = "Fix Form"
-                    #count_status = 'NO COUNT'
+            
+                    #else:
+                        #feedback = "Fix Form"
+                        #count_status = 'NO COUNT'
 
 
         #print(count)
@@ -170,20 +191,23 @@ while True:
                 (0, 0, 255), 5)
     
     #Feedback 
-    cv2.rectangle(img, (width//2-140, 0), (width//2 + 140, 40), (255, 200, 255), cv2.FILLED)
-    cv2.putText(img, feedback, (width//2 - 140, 35), cv2.FONT_HERSHEY_PLAIN, 2,
-                (255, 0, 0), 2)
+    cv2.rectangle(img, (width//2-200, 0), (width//2 + 200, 40), (255, 255, 255), cv2.FILLED)
+    cv2.putText(img, feedback, (width//2 - 200, 35), cv2.FONT_HERSHEY_PLAIN, 2,
+                (0, 0, 255), 2)
     
     #Count Status
-    cv2.rectangle(img, (width//2-140, 40), (width//2 + 140, 80), (255, 200, 255), cv2.FILLED)
-    cv2.putText(img, count_status, (width//2 - 140, 75), cv2.FONT_HERSHEY_PLAIN, 2,
-                (255, 0, 0), 2)
+    cv2.rectangle(img, (width//2-200, 40), (width//2 + 200, 80), (255, 255, 255), cv2.FILLED)
+    cv2.putText(img, count_status, (width//2 - 200, 75), cv2.FONT_HERSHEY_PLAIN, 2,
+                (0, 0, 255), 2)
+
 
     cv2.imshow('screen capture', img)
+    videoWriter.write(img)
 
     if (cv2.waitKey(1) & 0xFF) == ord('q'):
         cv2.destroyAllWindows()
         break
     
-            
+cap.release() #release webcam
+videoWriter.release()                
 cv2.destroyAllWindows()
