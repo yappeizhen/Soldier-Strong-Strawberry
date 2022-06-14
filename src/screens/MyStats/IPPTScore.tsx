@@ -34,26 +34,24 @@ export default function IPPTScore() {
           if (snapshot.exists()) {
             // Getting the data from firebase .data()
             setScore(snapshot.data().mostRecentIpptScore);
-            console.log(snapshot.data())
+            // console.log(snapshot.data())
           }
         });
       }
     };
     return unsubscribe();
   }, [user]);
-    return (
-      <View style={styles.container}>
-        <Card style={styles.card}>
-          <Card.Title
-            title="Current IPPT Score"
-          />
-          <Card.Content>
-            <View style={{width: "100%", alignItems: "center"}}>
-              <Text style={styles.ipptText}>{score}</Text>
-            </View>
-          </Card.Content>
-        </Card>
-      </View>
+  return (
+    <View style={styles.container}>
+      <Card style={styles.card}>
+        <Card.Title title="Current IPPT Score" />
+        <Card.Content>
+          <View style={{ width: "100%", alignItems: "center" }}>
+            <Text style={styles.ipptText}>{score}</Text>
+          </View>
+        </Card.Content>
+      </Card>
+    </View>
   );
 }
 
@@ -65,7 +63,7 @@ const styles = StyleSheet.create({
     width: "80%",
     marginTop: 10,
     marginBottom: 10,
-    paddingBottom: 5
+    paddingBottom: 5,
   },
   container: {
     flex: 1,
@@ -80,6 +78,6 @@ const styles = StyleSheet.create({
   ipptText: {
     fontSize: 50,
     fontWeight: "bold",
-    color: Colors['light'].tint
-  }
+    color: Colors["light"].tint,
+  },
 });
