@@ -1,15 +1,28 @@
 # Soldier-Strong
+An IPPT Tracker app that uses Cloud Firestore, TensorflowJS, and Google/Apple Maps API to conduct live tracking of an NSMan's training routine including pushups, situps, and runs.
 
-## Features
-- [x] Swipeable bottom tab navigation (default)
-- [x] Shifting bottom tab navigation
+## Completed Features
+- [x] Profile Page Editing
+- [x] User Dashboard with statistics updated live from cloud firestore
+- [x] Running Distance and Location tracker using Google/Apple Maps
+- [x] Pushup Counter (Computer Vision)
+- [x] Situps Counter (Computer Vision)
+- [x] IPPT Score Calculator
+
+## Functionality
 - [x] Stack navigation and modal
 - [x] Drawer navigation
-- [x] Linked to Firebase
+- [x] Linked to Firebase Cloud Firestore for live updates
 - [x] Sign up
 - [x] Basic log in and log out
 - [x] Input validation
 - [x] Success and error messages
+
+## Tech Stack
+- React Native Expo
+- Firebase Cloud Firestore
+- TensorflowJS
+- MediaPipe
 
 ## Simulated ELISS System using Computer Vision
 Prototype build using Mediapipe model. Deployed Posenet lighting model on Tensorflow.js via React Native for real-time cilent-side inference while protecting user privacy.
@@ -49,7 +62,7 @@ https://user-images.githubusercontent.com/69728128/173635693-923858e1-e192-4336-
 
 ## Getting Started
 
-### `npm install`
+### `npm install --legacy-peer-deps`
 
 Installs all dependencies or devDependencies from package.json file
 
