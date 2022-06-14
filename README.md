@@ -23,7 +23,13 @@ https://user-images.githubusercontent.com/69728128/173635633-76432b30-ce6d-4aa2-
 
 https://user-images.githubusercontent.com/69728128/173635693-923858e1-e192-4336-881d-adaadc5a108e.mp4
 
+## Use of App
 
+### Login/Signup
+<img width="516" alt="Screenshot 2022-06-15 at 01 16 29" src="https://user-images.githubusercontent.com/68325028/173637743-40019c78-fa8c-4698-a80e-adecdffd47b6.png">
+<img width="516" alt="Screenshot 2022-06-15 at 01 17 18" src="https://user-images.githubusercontent.com/68325028/173637850-1150c57e-05f8-402f-8159-47bbd465a84f.png">
+
+###
 
 ## Getting Started
 
