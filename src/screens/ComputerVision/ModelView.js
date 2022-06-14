@@ -1,9 +1,5 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text, View, useWindowDimensions } from 'react-native';
-import Svg, {
-  Circle,
-  Rect,
-} from 'react-native-svg';
 
 import * as posenet from '@tensorflow-models/posenet';
 import * as tf from "@tensorflow/tfjs";

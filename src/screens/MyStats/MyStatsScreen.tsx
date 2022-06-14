@@ -13,15 +13,19 @@ import { useAuthState } from "../../hooks/useAuthState";
 import IPPTScore from "./IPPTScore";
 import TrainingPlan from "./TrainingPlan";
 
-export default function MyStatsScreen({ navigation }: any) {
+export default function MyStatsScreen() {
   const [targetIPPTDate, setTargetIPPTDate] = useState<Date | undefined>();
   const [endOfCycleDate, setEndOfCycleDate] = useState<Date | undefined>();
+  const [userName, setUserName] = useState<any>();
   const { user } = useAuthState();
   useEffect(() => {
     const unsubscribe = () => {
       if (user) {
         const userProfileRef = doc(firebaseFirestore, "userProfiles", user.uid);
         onSnapshot(userProfileRef, (snapshot) => {
+          if (snapshot.exists()) {
+            setUserName(snapshot.data().name);
+          }
           if (snapshot.exists() && snapshot.data().birthday) {
             let thisCycle: Date = snapshot.data().birthday?.toDate();
             const currentYear = new Date().getFullYear();
@@ -51,6 +55,27 @@ export default function MyStatsScreen({ navigation }: any) {
   };
   return (
     <ScrollView>
+      <View style={styles.titleContainer}>
+        <Text
+          style={{
+            fontWeight: "500",
+            fontSize: 16,
+            marginTop: 24,
+            textAlign: "center",
+          }}
+        >
+          Hi {userName},
+        </Text>
+        <Text
+          style={{
+            fontWeight: "500",
+            fontSize: 16,
+            textAlign: "center",
+          }}
+        >
+          Welcome to Soldier Strong!
+        </Text>
+      </View>
       <TrainingPlan />
       <IPPTScore />
       <View style={styles.container}>
@@ -125,6 +150,14 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
+  },
+  titleContainer: {
+    flex: 1,
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    textAlign: "center",
+    width: "100%",
   },
   title: {
     marginTop: 24,
