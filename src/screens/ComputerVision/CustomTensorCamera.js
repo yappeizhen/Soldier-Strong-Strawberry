@@ -1,6 +1,6 @@
 import { Camera, CameraType } from 'expo-camera';
 import React from 'react';
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { StyleSheet, TouchableOpacity, View } from 'react-native';
 
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { cameraWithTensors } from '@tensorflow/tfjs-react-native';
