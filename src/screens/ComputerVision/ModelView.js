@@ -1,4 +1,3 @@
-import { Camera } from 'expo-camera';
 import React, { useState } from 'react';
 import { StyleSheet, Text, View, useWindowDimensions } from 'react-native';
 import Svg, {
@@ -57,7 +56,8 @@ export function ModelView() {
         <Text style={styles.text}>{pushupCount}</Text>
       </View>
       <View style={{ borderRadius: 20, overflow: "hidden" }}>
-        <ModelCamera model={model}
+        <ModelCamera
+          model={model}
           modelRef={modelRef}
           setCountStatus={setCountStatus}
           setPushupCount={() => { setPushupCount(pushupCount + 1) }}
@@ -78,7 +78,8 @@ function ModelCamera({
   setFeedback,
   setCountStatus,
   isGoingUp,
-  setIsGoingUp }) {
+  setIsGoingUp,
+}) {
   const raf = React.useRef(null);
   const size = useWindowDimensions();
 
@@ -237,7 +238,6 @@ function ModelCamera({
       <CustomTensorCamera
         width={size.width}
         style={styles.camera}
-        type={Camera.Constants.Type.back}
         onReady={onReady}
         autorender
       />
