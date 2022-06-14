@@ -38,7 +38,11 @@ export default function HomeStackNavigator() {
           animation: "slide_from_bottom",
         }}
       >
-        <Stack.Screen name="Modal" component={ModalScreen} />
+        <Stack.Screen
+          name="Modal"
+          component={ModalScreen}
+          options={{ title: "Hello" }}
+        />
       </Stack.Group>
     </Stack.Navigator>
   );

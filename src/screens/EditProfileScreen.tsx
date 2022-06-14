@@ -47,10 +47,7 @@ export default function EditProfileScreen() {
             setEmail(userProfileData.email);
             setBirthday(userProfileData.birthday?.toDate());
             setIntendedIpptDate(userProfileData.intendedIpptDate?.toDate());
-            !userProfileData.mostRecentIpptScore ??
-              setMostRecentIpptScore(
-                userProfileData.mostRecentIpptScore.toString()
-              );
+            setMostRecentIpptScore(userProfileData.mostRecentIpptScore);
             if (userProfileData.isMale !== null) {
               userProfileData.isMale ? setGender("male") : setGender("female");
             }

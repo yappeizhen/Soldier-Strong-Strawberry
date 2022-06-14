@@ -47,7 +47,14 @@ export default function IPPTScore() {
         <Card.Title title="Current IPPT Score" />
         <Card.Content>
           <View style={{ width: "100%", alignItems: "center" }}>
-            <Text style={styles.ipptText}>{score}</Text>
+            {score ? (
+              <Text style={styles.ipptText}>{score}</Text>
+            ) : (
+              <Text style={{ textAlign: "center" }}>
+                Visit your profile page in the drawer menu to update your
+                details!
+              </Text>
+            )}
           </View>
         </Card.Content>
       </Card>

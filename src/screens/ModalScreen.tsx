@@ -7,13 +7,19 @@ import { Text, View } from "../components/Themed";
 export default function ModalScreen() {
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Modal</Text>
+      <Text style={styles.title}>Welcome to Soldier Strong!</Text>
       <View
         style={styles.separator}
         lightColor="#eee"
         darkColor="rgba(255,255,255,0.1)"
       />
-      <EditScreenInfo path="/screens/ModalScreen.tsx" />
+      <Text style={{ fontSize: 16, textAlign: "center", marginBottom: 12 }}>
+        To get started, try visiting the Profile Page on your navigation drawer
+        to input your details!
+      </Text>
+      <Text style={{ fontSize: 16, textAlign: "center" }}>
+        Don't forget to test out our Runs Tracker, and Situps Tracker as well :)
+      </Text>
 
       {/* Use a light status bar on iOS to account for the black space above the modal */}
       <StatusBar style={Platform.OS === "ios" ? "light" : "dark"} />
