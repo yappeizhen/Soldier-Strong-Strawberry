@@ -11,6 +11,20 @@
 - [x] Input validation
 - [x] Success and error messages
 
+## Simulated ELISS System using Computer Vision
+Prototype build using Mediapipe model. Deployed Posenet lighting model on Tensorflow.js via React Native for real-time cilent-side inference while protecting user privacy.
+
+#### Push Up Demo
+
+https://user-images.githubusercontent.com/69728128/173635633-76432b30-ce6d-4aa2-8f8f-4de619f25cc9.mp4
+
+
+#### Sit Up Demo
+
+https://user-images.githubusercontent.com/69728128/173635693-923858e1-e192-4336-881d-adaadc5a108e.mp4
+
+
+
 ## Getting Started
 
 ### `npm install`
