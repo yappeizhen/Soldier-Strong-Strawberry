@@ -17,9 +17,13 @@
     },
     "assetBundlePatterns": ["**/*"],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.brainhack.strawberry",
+      "buildNumber": "1.0.0"
     },
     "android": {
+      "package": "com.brainhack.strawberry",
+      "versionCode": 1,
       "adaptiveIcon": {
         "foregroundImage": "./src/assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"

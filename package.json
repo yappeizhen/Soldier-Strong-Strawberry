@@ -44,6 +44,7 @@
     "expo-splash-screen": "~0.15.1",
     "expo-status-bar": "~1.3.0",
     "expo-system-ui": "~1.2.0",
+    "expo-updates": "^0.13.2",
     "expo-web-browser": "~10.2.0",
     "firebase": "^9.8.1",
     "font-awesome": "^4.7.0",
