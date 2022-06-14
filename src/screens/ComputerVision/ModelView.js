@@ -212,7 +212,7 @@ function ModelCamera({
         if (angles.elbow > 120 && angles.shoulder > 40 && angles.hip > 120 && angles.hip < 190 && angles.knee > 120) {
           setCountStatus("");
           setFeedback("Go Down");
-          if (!currentIsGoingUp) {
+          if (currentIsGoingUp) {
             setPushupCount();
             currentIsGoingUp = false;
             setIsGoingUp();
