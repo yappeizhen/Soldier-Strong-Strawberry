@@ -30,7 +30,7 @@ export default function StaticsStackNavigator() {
       />
       <Stack.Screen
         name="Situps"
-        component={SitupsScreen}
+        component={PushupsScreen}
         options={{ title: "Sit Ups", headerTransparent: true }}
       />
     </Stack.Navigator>

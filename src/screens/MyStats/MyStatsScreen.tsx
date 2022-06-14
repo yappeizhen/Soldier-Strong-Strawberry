@@ -1,4 +1,4 @@
-import { doc, onSnapshot, updateDoc } from "firebase/firestore";
+import { doc, onSnapshot } from "firebase/firestore";
 import moment from "moment";
 import { useEffect, useState } from "react";
 import { Linking, StyleSheet } from "react-native";
