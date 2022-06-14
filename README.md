@@ -52,10 +52,8 @@ https://user-images.githubusercontent.com/69728128/173635693-923858e1-e192-4336-
 
 
 
-### Statics and Calculator Screen
-<img height="400" alt="Screenshot 2022-06-15 at 01 22 05" src="https://user-images.githubusercontent.com/68325028/173638711-af4a4201-6649-4f75-b4f6-408128513e26.png"><img height="400" alt="Screenshot 2022-06-12 at 15 35 20" src="https://user-images.githubusercontent.com/68325028/173639091-b539b7b4-f194-409e-9f7c-b0e936d90716.png">
-
-
+### Statics, Run Tracker and Calculator Screen
+<img height="400" alt="Screenshot 2022-06-15 at 01 22 05" src="https://user-images.githubusercontent.com/68325028/173638711-af4a4201-6649-4f75-b4f6-408128513e26.png"><img height="400" alt="Screenshot 2022-06-15 at 01 22 05" src="https://user-images.githubusercontent.com/68325028/173642812-541cc60e-54da-4642-8617-8ccda444a23c.png"><img height="400" alt="Screenshot 2022-06-12 at 15 35 20" src="https://user-images.githubusercontent.com/68325028/173639091-b539b7b4-f194-409e-9f7c-b0e936d90716.png">
 
 
 
