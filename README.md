@@ -1,4 +1,4 @@
-# Strawberry-Brainhack2022
+# Soldier-Strong
 
 ## Features
 - [x] Swipeable bottom tab navigation (default)
