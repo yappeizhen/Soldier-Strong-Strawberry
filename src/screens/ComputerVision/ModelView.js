@@ -30,7 +30,7 @@ export function ModelView() {
       style={{ flex: 1, backgroundColor: "black", justifyContent: "center" }}
     >
       <View style={styles.keypointcontainer}>
-        <Svg height="50" width="50">
+        {/* <Svg height="50" width="50">
           <Circle
             cx="50"
             cy="50"
@@ -48,7 +48,7 @@ export function ModelView() {
             strokeWidth="2"
             fill="yellow"
           />
-        </Svg>
+        </Svg> */}
       </View>
       <View style={styles.container}>
         <Text style={styles.text}>{countStatus}</Text>
