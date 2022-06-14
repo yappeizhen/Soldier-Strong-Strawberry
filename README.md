@@ -36,28 +36,27 @@ https://user-images.githubusercontent.com/69728128/173635633-76432b30-ce6d-4aa2-
 
 https://user-images.githubusercontent.com/69728128/173635693-923858e1-e192-4336-881d-adaadc5a108e.mp4
 
-#### PoseNet Tensorflow.js Pushup Screen on Application
+#### PoseNet Tensorflow.js Pushup Screen
 
-![Push Up Screen](https://user-images.githubusercontent.com/69728128/173638256-a136d788-d25c-4adc-9d8b-5dd4d5b93ac3.jpg)
-
+<img width="200" alt="Push Up Screen" src="https://user-images.githubusercontent.com/69728128/173638256-a136d788-d25c-4adc-9d8b-5dd4d5b93ac3.jpg"> 
 
 ## Use of App
 
-### Editing Profile
-<img width="200" alt="Screenshot 2022-06-15 at 01 25 56" src="https://user-images.githubusercontent.com/68325028/173639426-d3bfe012-b7cf-48ba-ab4a-2331911c16cd.png">
+### Editing Profile Screen and Home Screen
+<img width="200" alt="Screenshot 2022-06-15 at 01 25 56" src="https://user-images.githubusercontent.com/68325028/173639426-d3bfe012-b7cf-48ba-ab4a-2331911c16cd.png"> <img width="200" alt="Screenshot 2022-06-15 at 01 25 16" src="https://user-images.githubusercontent.com/68325028/173639284-2143d652-8821-4e06-a3d5-c642fa5c38eb.png">
 
 
-### Login/Signup
-<img width="200" alt="Screenshot 2022-06-15 at 01 16 29" src="https://user-images.githubusercontent.com/68325028/173637743-40019c78-fa8c-4698-a80e-adecdffd47b6.png">
-<img width="200" alt="Screenshot 2022-06-15 at 01 17 18" src="https://user-images.githubusercontent.com/68325028/173637850-1150c57e-05f8-402f-8159-47bbd465a84f.png">
-<img width="200" alt="Screenshot 2022-06-15 at 01 25 16" src="https://user-images.githubusercontent.com/68325028/173639284-2143d652-8821-4e06-a3d5-c642fa5c38eb.png">
+### Login/Signup Screen
+<img width="200" alt="Screenshot 2022-06-15 at 01 16 29" src="https://user-images.githubusercontent.com/68325028/173637743-40019c78-fa8c-4698-a80e-adecdffd47b6.png"> <img width="200" alt="Screenshot 2022-06-15 at 01 17 18" src="https://user-images.githubusercontent.com/68325028/173637850-1150c57e-05f8-402f-8159-47bbd465a84f.png">
 
 
-### Statics
-<img width="200" alt="Screenshot 2022-06-15 at 01 22 05" src="https://user-images.githubusercontent.com/68325028/173638711-af4a4201-6649-4f75-b4f6-408128513e26.png">
 
-### Calculator Screen
-<img width="200" alt="Screenshot 2022-06-12 at 15 35 20" src="https://user-images.githubusercontent.com/68325028/173639091-b539b7b4-f194-409e-9f7c-b0e936d90716.png">
+
+### Statics and Calculator Screen
+<img width="200" alt="Screenshot 2022-06-15 at 01 22 05" src="https://user-images.githubusercontent.com/68325028/173638711-af4a4201-6649-4f75-b4f6-408128513e26.png"><img width="200" alt="Screenshot 2022-06-12 at 15 35 20" src="https://user-images.githubusercontent.com/68325028/173639091-b539b7b4-f194-409e-9f7c-b0e936d90716.png">
+
+
+
 
 
 ## Getting Started
