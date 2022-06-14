@@ -60,7 +60,8 @@ export function ModelView() {
           model={model}
           modelRef={modelRef}
           setCountStatus={setCountStatus}
-          setPushupCount={() => { setPushupCount(pushupCount + 1) }}
+          // currNumPushups={pushupCount}
+          setPushupCount={setPushupCount}
           setFeedback={setFeedback}
           isGoingUp={isGoingUp.current}
           setIsGoingUp={() => {
@@ -79,10 +80,11 @@ function ModelCamera({
   setCountStatus,
   isGoingUp,
   setIsGoingUp,
+  // currNumPushups
 }) {
   const raf = React.useRef(null);
   const size = useWindowDimensions();
-
+  let numPushups = 0;
   let isReady = false;
   let currentIsGoingUp = isGoingUp;
   let angles = { elbow: 0, shoulder: 0, hip: 0, knee: 0 }
@@ -103,18 +105,17 @@ function ModelCamera({
     };
   }, []);
 
-  const onReady = React.useCallback(
+  const onReady =
     (images) => {
       const loop = async () => {
         try {
           const nextImageTensor = images.next().value;
           const predictions = await model.estimateSinglePose(nextImageTensor, { flipHorizontal: true });
           if (predictions) {
+            // console.log(predictions);
             currPreds = predictions;
             initialiseKeypointMap();
-            if (!isReady) {
-              isCorrectForm();
-            }
+            isCorrectForm();
             getPushUpStatus();
             // console.log(angles);
           }
@@ -127,10 +128,7 @@ function ModelCamera({
         }
       };
       loop();
-    },
-    []
-  );
-
+    }
   const initialiseKeypointMap = () => {
     for (let i = 0; i < leftLandmarkIndexes.length; i++) {
       leftVisibilitySum += currPreds.keypoints[leftLandmarkIndexes[i]].score;
@@ -172,63 +170,64 @@ function ModelCamera({
     newAngles.shoulder = findAngle("shoulder", "elbow", "hip");
     newAngles.hip = findAngle("hip", "shoulder", "knee");
     newAngles.knee = findAngle("knee", "hip", "ankle");
-    if (newAngles.elbow > 120
+    if (newAngles.elbow > 130
       && newAngles.shoulder > 20
-      && newAngles.hip > 140 && angles.hip < 190
-      && newAngles.knee > 140) {
+      && newAngles.hip > 100 && angles.hip < 200
+      && newAngles.knee > 90) {
       isReady = true;
-      console.log("IM READYYYYYYYYY")
+      // console.log("IM READYYYYYYYYY")
     }
     return newAngles;
   }
   const getPushUpStatus = () => {
     if (isReady) {
-      if (angles.elbow < 100) {
-        if (angles.elbow <= 100
-          && angles.hip > 120 && angles.hip < 190
-          && angles.knee > 120) {
-          setFeedback("Go Up");
-          if (!currentIsGoingUp) {
-            currentIsGoingUp = true;
-            setIsGoingUp();
-            setCountStatus("");
-          } else {
-            setCountStatus("No Count");
-          }
-        } else if (angles.elbow > 70) {
-          setFeedback("Lower Body");
-          setCountStatus("No Count!");
-        } else if (angles.hip <= 120 || angles.hip >= 190) {
-          setFeedback("Straighten Back");
-          setCountStatus("No Count");
-        } else if (angles.knee <= 120) {
-          setFeedback("Straighten Knee");
-          setCountStatus("No Count");
-        } else {
-          setFeedback("Fix Form");
-          setCountStatus("No Count");
-        }
-      }
-      if (angles.elbow > 120) {
-        if (angles.elbow > 120 && angles.shoulder > 40 && angles.hip > 120 && angles.hip < 190 && angles.knee > 120) {
+      if (angles.elbow <= 130
+        && angles.hip > 100 && angles.hip < 200
+        && angles.knee > 90) {
+        setFeedback("Go Up");
+        if (!currentIsGoingUp) {
+          currentIsGoingUp = true;
+          setIsGoingUp();
           setCountStatus("");
-          setFeedback("Go Down");
-          if (currentIsGoingUp) {
-            setPushupCount();
-            currentIsGoingUp = false;
-            setIsGoingUp();
-            setCountStatus("Success!");
-          }
-        } else if (angles.elbow <= 120) {
-          setFeedback("Straighten Elbows");
-          setCountStatus("No Count");
-        } else if (angles.hip <= 120 && angles.hip >= 190) {
-          setFeedback("Straighten Back");
-          setCountStatus("No Count");
-        } else if (angles.knee <= 120) {
-          setFeedback("Straighten Knee");
+        } else {
           setCountStatus("No Count");
         }
+      } else if (angles.elbow > 130) {
+        setFeedback("Lower Body");
+        setCountStatus("No Count!");
+      } else if (angles.hip <= 100 || angles.hip >= 200) {
+        setFeedback("Straighten Back");
+        setCountStatus("No Count");
+      } else if (angles.knee <= 90) {
+        setFeedback("Straighten Knee");
+        setCountStatus("No Count");
+      } else {
+        setFeedback("Fix Form");
+        setCountStatus("No Count");
+      }
+      if (angles.elbow > 70
+        && angles.shoulder > 20
+        && angles.hip > 100 && angles.hip < 200
+        && angles.knee > 90) {
+        setCountStatus("");
+        setFeedback("Go Down");
+        // console.log("I am going up: ", currentIsGoingUp);
+        if (currentIsGoingUp) {
+          numPushups = numPushups + 1;
+          setPushupCount(numPushups);
+          currentIsGoingUp = false;
+          setIsGoingUp();
+          setCountStatus("Success!");
+        }
+      } else if (angles.elbow <= 80) {
+        setFeedback("Straighten Elbows");
+        setCountStatus("No Count");
+      } else if (angles.hip <= 100 && angles.hip >= 200) {
+        setFeedback("Straighten Back");
+        setCountStatus("No Count");
+      } else if (angles.knee <= 90) {
+        setFeedback("Straighten Knee");
+        setCountStatus("No Count");
       }
     }
   }
