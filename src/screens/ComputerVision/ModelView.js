@@ -23,7 +23,10 @@ export function ModelView() {
   if (!model) {
     return <LoadingView message="Loading TensorFlow model" />;
   }
-
+  const scale = {
+    height: size.height / 400,
+    width: size.width / 300
+  };
   return (
     <View
       style={{ flex: 1, backgroundColor: "black", justifyContent: "center" }}
@@ -31,8 +34,8 @@ export function ModelView() {
       <Svg height={size.height} width={size.width} style={styles.keypointcontainer}>
         {keypoints.map((item, index) => (
           <Circle
-            cx={item.position.x}
-            cy={item.position.y}
+            cx={item.position.x * scale.width}
+            cy={item.position.y * scale.height}
             r="5"
             stroke="blue"
             strokeWidth="2.5"
