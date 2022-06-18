@@ -83,10 +83,11 @@ function ModelCamera({
   let currentIsGoingUp = isGoingUp;
   let angles = { elbow: 0, shoulder: 0, hip: 0, knee: 0 }
   let currPreds;
+  let currKeypoints;
   let landmarkIndexMap;
-  let threshold = 0.5
-  const leftLandmarkIndexes = [1, 3, 5, 7, 9, 11, 13, 15];
-  const rightLandmarkIndexes = [2, 4, 6, 8, 10, 12, 14, 16];
+  let threshold = 0
+  const leftLandmarkIndexes = [5, 7, 9, 11, 13, 15];
+  const rightLandmarkIndexes = [6, 8, 10, 12, 14, 16];
   let leftVisibilitySum = 0;
   let rightVisibilitySum = 0;
 
@@ -110,11 +111,11 @@ function ModelCamera({
               flipHorizontal: true,
             });
           if (predictions) {
-            // console.log(predictions);
             currPreds = predictions;
-            const visiblePredScore = initialiseKeypointMap();
-            if ((visiblePredScore / 8) > threshold) {
-              setKeypoints(currPreds.keypoints)
+            if (currPreds.score > threshold) {
+              const relevantKeypoints = initialiseKeypointMap();
+              currKeypoints = relevantKeypoints;
+              setKeypoints(currKeypoints);
               isCorrectForm();
               getPushUpStatus();
             }
@@ -133,26 +134,30 @@ function ModelCamera({
   const initialiseKeypointMap = () => {
     for (let i = 0; i < leftLandmarkIndexes.length; i++) {
       leftVisibilitySum += currPreds.keypoints[leftLandmarkIndexes[i]].score;
-      rightVisibilitySum += currPreds.keypoints[leftLandmarkIndexes[i]].score;
+      rightVisibilitySum += currPreds.keypoints[rightLandmarkIndexes[i]].score;
     }
-    const visiblePredScore = leftVisibilitySum > rightVisibilitySum ? leftVisibilitySum : rightVisibilitySum;
     const landmarkIndexes = leftVisibilitySum > rightVisibilitySum ? leftLandmarkIndexes : rightLandmarkIndexes
     landmarkIndexMap = {
-      eye: landmarkIndexes[0],
-      ear: landmarkIndexes[1],
-      shoulder: landmarkIndexes[2],
-      elbow: landmarkIndexes[3],
-      wrist: landmarkIndexes[4],
-      hip: landmarkIndexes[5],
-      knee: landmarkIndexes[6],
-      ankle: landmarkIndexes[7]
+      shoulder: 0,
+      elbow: 1,
+      wrist: 2,
+      hip: 3,
+      knee: 4,
+      ankle: 5
     }
-    return visiblePredScore
+    let relevantKeypoints = [];
+    for (let j = 0; j < 6; j++) {
+      relevantKeypoints.push(currPreds.keypoints[landmarkIndexes[j]]);
+    }
+    currPreds.keypoints = relevantKeypoints;
+    // console.log(relevantKeypoints);
+    return relevantKeypoints;
   }
   const getCoordinates = (index) => {
+    //console.log(index);
     return {
-      x: currPreds.keypoints[index].position.x,
-      y: currPreds.keypoints[index].position.y
+      x: currKeypoints[index].position.x,
+      y: currKeypoints[index].position.y
     };
   };
   const findAngle = (first, second, third) => {
