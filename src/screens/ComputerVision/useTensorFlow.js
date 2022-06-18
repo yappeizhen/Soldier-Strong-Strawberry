@@ -15,12 +15,7 @@ export function useTensorFlowModel(modelKind) {
 
   React.useEffect(() => {
     tf.setBackend('rn-webgl').then(() => {
-      modelKind.load({
-        architecture: 'MobileNetV1',
-        outputStride: 16,
-        inputResolution: { width: 350, height: 350 },
-        multiplier: 1
-      }).then((model) => {
+      modelKind.load().then((model) => {
         if (isMounted.current) {
           setModel(model);
         }

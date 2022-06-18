@@ -121,6 +121,7 @@ function ModelCamera({
             });
           if (predictions) {
             currPreds = predictions;
+            // console.log(predictions);
             if (currPreds.score > threshold) {
               const relevantKeypoints = initialiseKeypointMap();
               currKeypoints = relevantKeypoints;
