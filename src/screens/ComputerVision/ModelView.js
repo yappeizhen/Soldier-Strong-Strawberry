@@ -1,3 +1,4 @@
+import * as ScreenOrientation from 'expo-screen-orientation';
 import React, { useState } from 'react';
 import { StyleSheet, Text, View, useWindowDimensions } from 'react-native';
 import Svg, { Circle } from 'react-native-svg'
@@ -11,6 +12,7 @@ import { useTensorFlowModel } from './useTensorFlow';
 
 export function ModelView() {
   const [pushupCount, setPushupCount] = useState(0);
+  const [screenOrientation, setScreenOrientation] = useState("LANDSCAPE");
   const [keypoints, setKeypoints] = useState([]);
   const [feedback, setFeedback] = useState("");
   const [countStatus, setCountStatus] = useState("");
