@@ -8,7 +8,7 @@
     "scheme": "soldier-strong",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./src/assets/images/splash.png",
+      "image": "./src/assets/images/newSplash.png",
       "resizeMode": "cover",
       "backgroundColor": "#ffffff"
     },
