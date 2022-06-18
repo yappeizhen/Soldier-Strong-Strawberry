@@ -10,7 +10,7 @@ export default function PushupsScreen() {
   const [permission, requestPermission] = Camera.useCameraPermissions();
   if (!permission?.granted) {
     return (
-      <LoadingView message="Camera permission is required to continue\n">
+      <LoadingView message="Camera permission is required to continue">
         <CustomButton onPress={requestPermission}>
           Grant Permission
         </CustomButton>
