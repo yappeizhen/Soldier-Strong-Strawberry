@@ -19,7 +19,7 @@ const TENSOR_SIZE = {
 const TensorCamera = cameraWithTensors(Camera);
 
 export function CustomTensorCamera({ style, width, ...props }) {
-  const [type, setType] = React.useState(CameraType.front)
+  const [type, setType] = React.useState(CameraType.back)
   const size = useWindowDimensions();
 
   const sizeStyle = React.useMemo(() => {
@@ -34,23 +34,19 @@ export function CustomTensorCamera({ style, width, ...props }) {
     };
   }, [width]);
 
-  const TENSOR_WIDTH = 152;
-  const CAMERA_RATIO = size.height / size.width;
-  const TENSOR_SIZE = {
-    width: TENSOR_WIDTH,
-    height: TENSOR_WIDTH * CAMERA_RATIO,
-  };
   return (
     <>
       <TensorCamera
         {...props}
         type={type}
+        zoom={0}
         style={[style, sizeStyle]}
         cameraTextureWidth={size.width}
         cameraTextureHeight={size.height}
-        resizeWidth={TENSOR_SIZE.width}
-        resizeHeight={TENSOR_SIZE.height}
+        resizeWidth={300}
+        resizeHeight={400}
         resizeDepth={3}
+        autorender={true}
       />
       <View style={styles.buttonContainer}>
         <TouchableOpacity
