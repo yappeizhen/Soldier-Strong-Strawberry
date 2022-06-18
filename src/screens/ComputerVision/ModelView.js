@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text, View, useWindowDimensions } from 'react-native';
-import Svg, { Circle } from 'react-native-svg'
+import Svg, { Circle, Text as SVGText } from 'react-native-svg'
 
 import * as posenet from '@tensorflow-models/posenet';
 import * as tf from "@tensorflow/tfjs";
@@ -33,14 +33,23 @@ export function ModelView() {
     >
       <Svg height={size.height} width={size.width} style={styles.keypointcontainer}>
         {keypoints.map((item, index) => (
-          <Circle
-            cx={item.position.x * scale.width}
-            cy={item.position.y * scale.height}
-            r="5"
-            stroke="blue"
-            strokeWidth="2.5"
-            key={index}
-          />))}
+          <>
+            <SVGText
+              x={item.position.x * scale.width - 20}
+              y={item.position.y * scale.height - 16}
+              fill="blue">
+              {item.part}
+            </SVGText>
+            <Circle
+              cx={item.position.x * scale.width}
+              cy={item.position.y * scale.height}
+              r="5"
+              stroke="blue"
+              strokeWidth="2.5"
+              fill="green"
+              key={index}
+            />
+          </>))}
       </Svg>
       <View style={styles.container}>
         <Text style={styles.text}>{countStatus}</Text>
