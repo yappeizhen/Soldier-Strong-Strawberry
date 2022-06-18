@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text, View, useWindowDimensions } from 'react-native';
+import Svg, { Circle } from 'react-native-svg'
 
 import * as posenet from '@tensorflow-models/posenet';
 import * as tf from "@tensorflow/tfjs";
@@ -10,11 +11,13 @@ import { useTensorFlowModel } from './useTensorFlow';
 
 export function ModelView() {
   const [pushupCount, setPushupCount] = useState(0);
+  const [keypoints, setKeypoints] = useState([]);
   const [feedback, setFeedback] = useState("");
   const [countStatus, setCountStatus] = useState("");
   const isGoingUp = React.useRef(false);
   const modelRef = React.useRef(null);
   const model = useTensorFlowModel(posenet);
+  const size = useWindowDimensions();
 
   modelRef.current = model;
   if (!model) {
@@ -25,27 +28,17 @@ export function ModelView() {
     <View
       style={{ flex: 1, backgroundColor: "black", justifyContent: "center" }}
     >
-      <View style={styles.keypointcontainer}>
-        {/* <Svg height="50" width="50">
+      <Svg height={size.height} width={size.width} style={styles.keypointcontainer}>
+        {keypoints.map((item, index) => (
           <Circle
-            cx="50"
-            cy="50"
-            r="45"
+            cx={item.position.x}
+            cy={item.position.y}
+            r="5"
             stroke="blue"
             strokeWidth="2.5"
-            fill="green"
-          />
-          <Rect
-            x="15"
-            y="15"
-            width="70"
-            height="70"
-            stroke="red"
-            strokeWidth="2"
-            fill="yellow"
-          />
-        </Svg> */}
-      </View>
+            key={index}
+          />))}
+      </Svg>
       <View style={styles.container}>
         <Text style={styles.text}>{countStatus}</Text>
         <Text style={styles.text}>{feedback}</Text>
@@ -55,6 +48,7 @@ export function ModelView() {
         <ModelCamera
           model={model}
           modelRef={modelRef}
+          setKeypoints={setKeypoints}
           setCountStatus={setCountStatus}
           // currNumPushups={pushupCount}
           setPushupCount={setPushupCount}
@@ -71,6 +65,7 @@ export function ModelView() {
 function ModelCamera({
   model,
   modelRef,
+  setKeypoints,
   setPushupCount,
   setFeedback,
   setCountStatus,
@@ -86,6 +81,7 @@ function ModelCamera({
   let angles = { elbow: 0, shoulder: 0, hip: 0, knee: 0 }
   let currPreds;
   let landmarkIndexMap;
+  let threshold = 0.5
   const leftLandmarkIndexes = [1, 3, 5, 7, 9, 11, 13, 15];
   const rightLandmarkIndexes = [2, 4, 6, 8, 10, 12, 14, 16];
   let leftVisibilitySum = 0;
@@ -106,13 +102,19 @@ function ModelCamera({
       const loop = async () => {
         try {
           const nextImageTensor = images.next().value;
-          const predictions = await model.estimateSinglePose(nextImageTensor, { flipHorizontal: true });
+          const predictions = await model.estimateSinglePose(nextImageTensor,
+            {
+              flipHorizontal: true,
+            });
           if (predictions) {
             // console.log(predictions);
             currPreds = predictions;
-            initialiseKeypointMap();
-            isCorrectForm();
-            getPushUpStatus();
+            const visiblePredScore = initialiseKeypointMap();
+            if ((visiblePredScore / 8) > threshold) {
+              setKeypoints(currPreds.keypoints)
+              isCorrectForm();
+              getPushUpStatus();
+            }
             // console.log(angles);
           }
           raf.current = requestAnimationFrame(loop);
@@ -130,6 +132,7 @@ function ModelCamera({
       leftVisibilitySum += currPreds.keypoints[leftLandmarkIndexes[i]].score;
       rightVisibilitySum += currPreds.keypoints[leftLandmarkIndexes[i]].score;
     }
+    const visiblePredScore = leftVisibilitySum > rightVisibilitySum ? leftVisibilitySum : rightVisibilitySum;
     const landmarkIndexes = leftVisibilitySum > rightVisibilitySum ? leftLandmarkIndexes : rightLandmarkIndexes
     landmarkIndexMap = {
       eye: landmarkIndexes[0],
@@ -141,6 +144,7 @@ function ModelCamera({
       knee: landmarkIndexes[6],
       ankle: landmarkIndexes[7]
     }
+    return visiblePredScore
   }
   const getCoordinates = (index) => {
     return {
@@ -232,7 +236,7 @@ function ModelCamera({
     () => (
       <CustomTensorCamera
         width={size.width}
-        style={styles.camera}
+        height={size.height}
         onReady={onReady}
         autorender
       />
@@ -261,11 +265,9 @@ const styles = StyleSheet.create({
     fontSize: 20,
   },
   keypointcontainer: {
-    zIndex: 2,
+    zIndex: 100,
     position: "absolute",
     backgroundColor: "transparent",
     alignItems: "center",
-    height: 100,
-    width: 100
   }
 });

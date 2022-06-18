@@ -1,21 +1,21 @@
-import {
-  StyleSheet,
-  View,
-  Text,
-  TouchableOpacity,
-  Platform,
-  PermissionsAndroid,
-  Button
-} from "react-native";
-import MapView, {
-  Marker,
-  AnimatedRegion,
-  Polyline,
-  PROVIDER_GOOGLE
-} from "react-native-maps";
+import * as Location from "expo-location"
 import haversine from "haversine";
 import { useEffect, useState } from "react";
-import * as Location from "expo-location"
+import {
+  Button,
+  PermissionsAndroid,
+  Platform,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View
+} from "react-native";
+import MapView, {
+  AnimatedRegion,
+  Marker,
+  PROVIDER_GOOGLE,
+  Polyline
+} from "react-native-maps";
 import {Stopwatch} from 'react-native-stopwatch-timer';
 
 let foregroundSubscription: any = null
@@ -162,7 +162,7 @@ export default function RunsScreen({navigation}: any) {
                 options={options}
                 //options for the styling
                 getTime={(time: any) => {
-                  console.log(time);
+                  // console.log(time);
                 }}
               />
             </TouchableOpacity>
