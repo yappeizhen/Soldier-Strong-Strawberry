@@ -1,6 +1,6 @@
 import { Camera, CameraType } from 'expo-camera';
 import React from 'react';
-import { StyleSheet, TouchableOpacity, View } from 'react-native';
+import { StyleSheet, TouchableOpacity, View, useWindowDimensions } from 'react-native';
 
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { cameraWithTensors } from '@tensorflow/tfjs-react-native';
@@ -19,7 +19,8 @@ const TENSOR_SIZE = {
 const TensorCamera = cameraWithTensors(Camera);
 
 export function CustomTensorCamera({ style, width, ...props }) {
-  const [type, setType] = React.useState(CameraType.back)
+  const [type, setType] = React.useState(CameraType.front)
+  const size = useWindowDimensions();
 
   const sizeStyle = React.useMemo(() => {
     const ratio = width / TEXTURE_SIZE.width;
@@ -33,14 +34,20 @@ export function CustomTensorCamera({ style, width, ...props }) {
     };
   }, [width]);
 
+  const TENSOR_WIDTH = 152;
+  const CAMERA_RATIO = size.height / size.width;
+  const TENSOR_SIZE = {
+    width: TENSOR_WIDTH,
+    height: TENSOR_WIDTH * CAMERA_RATIO,
+  };
   return (
     <>
       <TensorCamera
         {...props}
         type={type}
         style={[style, sizeStyle]}
-        cameraTextureWidth={TEXTURE_SIZE.width}
-        cameraTextureHeight={TEXTURE_SIZE.height}
+        cameraTextureWidth={size.width}
+        cameraTextureHeight={size.height}
         resizeWidth={TENSOR_SIZE.width}
         resizeHeight={TENSOR_SIZE.height}
         resizeDepth={3}
